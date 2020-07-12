@@ -1,3 +1,6 @@
+import * as path from "path";
+import * as fs from "fs";
+
 const pkg = require("../package.json");
 
 import { program } from "commander";
@@ -9,5 +12,9 @@ program
 
 if (program.init)
 {
-    console.log(__dirname);
+    fs.writeFileSync(path.join(__dirname, "ingredients.pizza"), JSON.stringify({
+        bundler: "webpack",
+        linter: "eslint",
+        templateEngine: "handlebars"
+    }, null, 4));
 }
