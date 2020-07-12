@@ -56,7 +56,7 @@ else if (program.make)
 
         childProcess.spawnSync("npm init -y", { stdio: "inherit", shell: true });
 
-        [
+        childProcess.spawnSync(`npm i -D ${[
             "typescript",
             "webpack",
             "webpack-cli",
@@ -67,7 +67,7 @@ else if (program.make)
             "css-loader",
             "scss-loader",
             "sass",
-        ].forEach(devDependency => childProcess.spawnSync(`npm i -D ${devDependency}`, { stdio: "inherit", shell: true }));
+        ].join(" ")}`, { stdio: "inherit", shell: true });
 
         [
             path.join(__dirname, "public", "assets", "css"),
