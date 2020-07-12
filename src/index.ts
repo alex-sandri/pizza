@@ -70,16 +70,13 @@ else if (program.make)
         ].forEach(devDependency => childProcess.spawnSync(`npm i -D ${devDependency}`));
 
         [
-            path.join(__dirname, "public"),
-            path.join(__dirname, "public", "assets"),
             path.join(__dirname, "public", "assets", "css"),
             path.join(__dirname, "public", "assets", "js"),
-            path.join(__dirname, "src"),
             path.join(__dirname, "src", "scss"),
             path.join(__dirname, "src", "ts"),
         ].forEach(dir =>
         {
-            if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
 
         switch (configOptions.bundler.name)
