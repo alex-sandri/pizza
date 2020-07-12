@@ -75,8 +75,8 @@ else if (program.make)
             path.join(__dirname, "public", "assets", "css"),
             path.join(__dirname, "public", "assets", "js"),
             path.join(__dirname, "src"),
-            path.join(__dirname, "public", "scss"),
-            path.join(__dirname, "public", "ts"),
+            path.join(__dirname, "src", "scss"),
+            path.join(__dirname, "src", "ts"),
         ].forEach(dir => fs.mkdirSync(dir));
 
         switch (configOptions.bundler.name)
