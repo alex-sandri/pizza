@@ -8,7 +8,7 @@ import { program } from "commander";
 import * as chalk from "chalk";
 
 const CONFIG_FILE_NAME = "ingredients.pizza";
-const CONFIG_FILE_PATH = path.join(__dirname, CONFIG_FILE_NAME);
+const CONFIG_FILE_PATH = path.join(process.cwd(), CONFIG_FILE_NAME);
 
 export type ConfigOptions =
 {
@@ -70,10 +70,10 @@ else if (program.make)
         ].join(" ")}`, { stdio: "inherit", shell: true });
 
         [
-            path.join(__dirname, "public", "assets", "css"),
-            path.join(__dirname, "public", "assets", "js"),
-            path.join(__dirname, "src", "scss"),
-            path.join(__dirname, "src", "ts"),
+            path.join(process.cwd(), "public", "assets", "css"),
+            path.join(process.cwd(), "public", "assets", "js"),
+            path.join(process.cwd(), "src", "scss"),
+            path.join(process.cwd(), "src", "ts"),
         ].forEach(dir =>
         {
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
@@ -83,7 +83,7 @@ else if (program.make)
         {
             case "webpack":
                 fs.writeFileSync(
-                    path.join(__dirname, "webpack.config.js"),
+                    path.join(process.cwd(), "webpack.config.js"),
                     fs.readFileSync(
                         path.join(__dirname, "config", "defaults", "webpack.config.js"),
                     ),
