@@ -2,4 +2,6 @@ import * as pkg from "../package.json";
 
 import { program } from "commander";
 
-program.version(pkg.version);
+program
+    .version(pkg.version)
+    .parse(process.argv);
