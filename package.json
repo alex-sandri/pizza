@@ -1,10 +1,10 @@
 {
   "name": "pizza",
   "version": "1.0.0",
-  "description": "",
-  "main": "./lib/index.js",
+  "description": "TODO",
+  "main": "lib/index.js",
   "bin": {
-    "pizza": "./lib/index.js"
+    "pizza": "lib/index.js"
   },
   "scripts": {
     "start": "nodemon -e ts --watch src/ --exec npm run build",
@@ -26,5 +26,16 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "commander": "^5.1.0"
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-sandri/pizza.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alex-sandri/pizza/issues"
+  },
+  "homepage": "https://github.com/alex-sandri/pizza#readme"
 }
