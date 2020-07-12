@@ -54,7 +54,7 @@ else if (program.make)
     {
         const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
 
-        childProcess.spawnSync("npm init -y");
+        childProcess.spawnSync("npm init -y", { stdio: "inherit", shell: true });
 
         [
             "typescript",
@@ -67,7 +67,7 @@ else if (program.make)
             "css-loader",
             "scss-loader",
             "sass",
-        ].forEach(devDependency => childProcess.spawnSync(`npm i -D ${devDependency}`));
+        ].forEach(devDependency => childProcess.spawnSync(`npm i -D ${devDependency}`, { stdio: "inherit", shell: true }));
 
         [
             path.join(__dirname, "public", "assets", "css"),
