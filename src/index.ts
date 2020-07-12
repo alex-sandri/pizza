@@ -11,9 +11,15 @@ const CONFIG_FILE_PATH = path.join(__dirname, CONFIG_FILE_NAME);
 
 export type ConfigOptions =
 {
-    bundler: "webpack",
-    linter: "eslint",
-    templateEngine: "handlebars",
+    bundler: {
+        name: "webpack",
+    },
+    linter: {
+        name: "eslint",
+    },
+    templateEngine: {
+        name: "handlebars",
+    },
 }
 
 program
@@ -25,9 +31,15 @@ program
 if (program.init)
 {
     fs.writeFileSync(CONFIG_FILE_PATH, JSON.stringify(<ConfigOptions>{
-        bundler: "webpack",
-        linter: "eslint",
-        templateEngine: "handlebars"
+        bundler: {
+            name: "webpack",
+        },
+        linter: {
+            name: "eslint",
+        },
+        templateEngine: {
+            name: "handlebars",
+        },
     }, null, 4));
 }
 else if (program.make)
@@ -40,5 +52,20 @@ else if (program.make)
     else
     {
         const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
+
+        switch (configOptions.bundler.name)
+        {
+            case "webpack":
+                fs.writeFileSync(
+                    path.join(__dirname, "webpack.config.js"),
+                    fs.readFileSync(
+                        path.join(__dirname, "config", "defaults", "webpack.config.js"),
+                    ),
+                );
+            break;
+            default:
+                console.log(chalk.red("Error:"), `Unsupported bundler: ${configOptions.bundler.name}`);
+            break;
+        }
     }
 }
