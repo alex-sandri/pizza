@@ -9,6 +9,13 @@ import * as chalk from "chalk";
 const CONFIG_FILE_NAME = "ingredients.pizza";
 const CONFIG_FILE_PATH = path.join(__dirname, CONFIG_FILE_NAME);
 
+export type ConfigOptions =
+{
+    bundler: "webpack",
+    linter: "eslint",
+    templateEngine: "handlebars",
+}
+
 program
     .version(pkg.version)
     .option("-i, --init", `Create ${CONFIG_FILE_NAME} config file`)
@@ -17,7 +24,7 @@ program
 
 if (program.init)
 {
-    fs.writeFileSync(CONFIG_FILE_PATH, JSON.stringify({
+    fs.writeFileSync(CONFIG_FILE_PATH, JSON.stringify(<ConfigOptions>{
         bundler: "webpack",
         linter: "eslint",
         templateEngine: "handlebars"
