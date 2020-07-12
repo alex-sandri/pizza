@@ -54,7 +54,7 @@ else if (program.make)
     {
         const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
 
-        childProcess.execSync("npm init -y");
+        childProcess.spawnSync("npm init -y");
 
         [
             "typescript",
@@ -67,7 +67,7 @@ else if (program.make)
             "css-loader",
             "scss-loader",
             "sass",
-        ].forEach(devDependency => childProcess.execSync(`npm i -D ${devDependency}`));
+        ].forEach(devDependency => childProcess.spawnSync(`npm i -D ${devDependency}`));
 
         [
             path.join(__dirname, "public"),
@@ -77,7 +77,10 @@ else if (program.make)
             path.join(__dirname, "src"),
             path.join(__dirname, "src", "scss"),
             path.join(__dirname, "src", "ts"),
-        ].forEach(dir => fs.mkdirSync(dir));
+        ].forEach(dir =>
+        {
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+        });
 
         switch (configOptions.bundler.name)
         {
