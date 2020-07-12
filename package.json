@@ -13,10 +13,13 @@
   "keywords": [],
   "author": "Alex Sandri",
   "license": "MIT",
+  "files": [
+    "lib/**/*"
+  ],
   "devDependencies": {
     "typescript": "^3.9.6"
   },
-  "files": [
-    "lib/**/*"
-  ]
+  "dependencies": {
+    "commander": "^5.1.0"
+  }
 }
