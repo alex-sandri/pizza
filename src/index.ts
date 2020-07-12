@@ -37,4 +37,8 @@ else if (program.make)
         console.log(chalk.red("Error:"), `Cannot find '${CONFIG_FILE_NAME}' file`);
         console.log("You need to run 'pizza --init' first");
     }
+    else
+    {
+        const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
+    }
 }
