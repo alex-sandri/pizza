@@ -7,6 +7,7 @@
     "pizza": "./lib/index.js"
   },
   "scripts": {
+    "start": "nodemon -e ts --watch src/ --exec npm run build",
     "build": "tsc"
   },
   "keywords": [],
