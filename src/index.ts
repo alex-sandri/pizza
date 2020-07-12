@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as fs from "fs";
+import * as childProcess from "child_process";
 
 const pkg = require("../package.json");
 
@@ -52,6 +53,31 @@ else if (program.make)
     else
     {
         const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
+
+        childProcess.execSync("npm init -y");
+
+        [
+            "typescript",
+            "webpack",
+            "webpack-cli",
+            "glob",
+            "ts-loader",
+            "file-loader",
+            "extract-loader",
+            "css-loader",
+            "scss-loader",
+            "sass",
+        ].forEach(devDependency => childProcess.execSync(`npm i -D ${devDependency}`));
+
+        [
+            path.join(__dirname, "public"),
+            path.join(__dirname, "public", "assets"),
+            path.join(__dirname, "public", "assets", "css"),
+            path.join(__dirname, "public", "assets", "js"),
+            path.join(__dirname, "src"),
+            path.join(__dirname, "public", "scss"),
+            path.join(__dirname, "public", "ts"),
+        ].forEach(dir => fs.mkdirSync(dir));
 
         switch (configOptions.bundler.name)
         {
