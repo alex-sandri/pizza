@@ -2,7 +2,7 @@
   "name": "pizza",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "bin": {
     "pizza": "./lib/index.js"
   },
