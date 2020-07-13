@@ -95,7 +95,7 @@ program
             "file-loader",
             "extract-loader",
             "css-loader",
-            "scss-loader",
+            "sass-loader",
             "sass",
         ].join(" ")}`, projectDirPath);
     
