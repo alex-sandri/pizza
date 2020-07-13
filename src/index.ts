@@ -122,6 +122,13 @@ program
                 path.join(__dirname, "config", "defaults", "ts", "index.ts"),
             ),
         );
+
+        fs.writeFileSync(
+            path.join(projectDirPath, "tsconfig.json"),
+            fs.readFileSync(
+                path.join(__dirname, "config", "defaults", "tsconfig.json"),
+            ),
+        );
     
         switch (configOptions.bundler.name)
         {
