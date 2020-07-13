@@ -94,7 +94,11 @@ program
 
         fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath);
 
-        runCommand("npm init -y", projectDirPath);
+        const defaultNpmPackage = fs.readJSONSync(path.join(__dirname, "config", "defaults", "package.json"));
+
+        defaultNpmPackage.name = name;
+
+        fs.writeJSONSync(path.join(projectDirPath, "package.json"), defaultNpmPackage);
     
         runCommand(`npm i -D ${[
             "typescript",
