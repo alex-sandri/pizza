@@ -8,6 +8,7 @@ import { program } from "commander";
 import * as chalk from "chalk";
 
 const validateNpmPackageName = require("validate-npm-package-name");
+const copyFiles = require("copyfiles");
 
 const CONFIG_FILE_NAME = "ingredients.pizza";
 
@@ -109,26 +110,14 @@ program
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
 
-        fs.writeFileSync(
-            path.join(projectDirPath, "src", "scss", "main.scss"),
-            fs.readFileSync(
-                path.join(__dirname, "config", "defaults", "scss", "main.scss"),
-            ),
-        );
-
-        fs.writeFileSync(
-            path.join(projectDirPath, "src", "ts", "index.ts"),
-            fs.readFileSync(
-                path.join(__dirname, "config", "defaults", "ts", "index.ts"),
-            ),
-        );
-
-        fs.writeFileSync(
-            path.join(projectDirPath, "tsconfig.json"),
-            fs.readFileSync(
-                path.join(__dirname, "config", "defaults", "tsconfig.json"),
-            ),
-        );
+        copyFiles([
+            // Source paths
+            path.join(__dirname, "config", "defaults", "src", "scss", "main.scss"),
+            path.join(__dirname, "config", "defaults", "src", "ts", "index.ts"),
+            path.join(__dirname, "config", "defaults", "tsconfig.json"),
+            // Destination path
+            projectDirPath,
+        ], { up: 2 });
     
         switch (configOptions.bundler.name)
         {
