@@ -11,13 +11,13 @@ const cssFiles = glob.sync(path.join(ASSETS_PATH, "css", "*.*.css"));
 
 jsFiles.forEach(jsFile =>
 {
-    const jsFileName = jsFile.split("/").pop();
+    const jsFileName = path.basename(jsFile);
 
     const fileNamePrefix = jsFileName.split(".")[0];
 
-    const cssFile = cssFiles.filter(cssFile => cssFile.split("/").pop().startsWith(`${fileNamePrefix}.`))[0];
+    const cssFile = cssFiles.filter(cssFile => path.basename(cssFile).startsWith(`${fileNamePrefix}.`))[0];
 
-    const cssFileName = cssFile.split("/").pop();
+    const cssFileName = path.basename(cssFile);
 
     fs.writeFileSync(
         path.join(PUBLIC_PATH, `${fileNamePrefix}.html`),

@@ -7,7 +7,7 @@ exports.default = [
     {
         entry: glob.sync("./src/routes/**/*.ts").reduce((entries, entry) =>
         {
-            const entryName = entry.split("/").pop().split(".")[0];
+            const entryName = path.basename(entry).split(".")[0];
 
             entries[entryName] = entry;
 
@@ -35,7 +35,7 @@ exports.default = [
     {
         entry: glob.sync("./src/routes/**/*.scss").reduce((entries, entry) =>
         {
-            const entryName = entry.split("/").pop().split(".")[0];
+            const entryName = path.basename(entry).split(".")[0];
 
             entries[entryName] = entry;
 
