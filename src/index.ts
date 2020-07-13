@@ -10,7 +10,6 @@ import * as chalk from "chalk";
 const validateNpmPackageName = require("validate-npm-package-name");
 
 const CONFIG_FILE_NAME = "ingredients.pizza";
-const CONFIG_FILE_PATH = path.join(process.cwd(), CONFIG_FILE_NAME);
 
 export type ConfigOptions =
 {
@@ -52,7 +51,9 @@ program
 
         fs.mkdirSync(projectDirPath);
 
-        fs.writeFileSync(CONFIG_FILE_PATH, JSON.stringify(<ConfigOptions>{
+        const configFilePath = path.join(projectDirPath, CONFIG_FILE_NAME);
+
+        fs.writeFileSync(configFilePath, JSON.stringify(<ConfigOptions>{
             bundler: {
                 name: "webpack",
             },
@@ -64,7 +65,7 @@ program
             },
         }, null, 4));
     
-        const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
+        const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(configFilePath).toString());
     
         childProcess.spawnSync("npm init -y", { stdio: "inherit", shell: true });
     
