@@ -31,6 +31,8 @@ const runCommand = (command: string, cwd?: string) =>
         cwd: cwd ?? process.cwd(),
     });
 
+const logError = (message: string) => console.log(chalk.red("Error:"), message);
+
 program.version(pkg.version);
     
 program
@@ -38,11 +40,15 @@ program
     .description("Create named project")
     .action(name =>
     {
-        const validationResult = validateNpmPackageName(name);
+        const validationResult: {
+            validForNewPackages: boolean,
+            validForOldPackages: boolean,
+            errors?: string[],
+        } = validateNpmPackageName(name);
 
         if (!validationResult.validForNewPackages)
         {
-            validationResult.errors.forEach(console.log);
+            (<string[]>validationResult.errors).forEach(logError);
 
             return;
         }
@@ -51,7 +57,7 @@ program
 
         if (fs.existsSync(projectDirPath))
         {
-            console.log(chalk.red("Error:"), `A folder named '${name}' already exists`);
+            logError(`A folder named '${name}' already exists`);
 
             return;
         }
@@ -110,7 +116,7 @@ program
                 );
             break;
             default:
-                console.log(chalk.red("Error:"), `Unsupported bundler: ${configOptions.bundler.name}`);
+                logError(`Unsupported bundler: ${configOptions.bundler.name}`);
             break;
         }
     });
