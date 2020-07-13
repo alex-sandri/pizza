@@ -27,6 +27,7 @@ program
     .version(pkg.version)
     .option("-i, --init", `Create ${CONFIG_FILE_NAME} config file`)
     .option("-m, --make", `Create config files and a basic folder structure based on the '${CONFIG_FILE_NAME}' config`)
+    .option("-s, --serve", "Build the project")
     .parse(process.argv);
 
 if (program.init)
@@ -94,4 +95,8 @@ else if (program.make)
             break;
         }
     }
+}
+else if (program.serve)
+{
+    childProcess.spawnSync("webpack", { stdio: "inherit", shell: true });
 }
