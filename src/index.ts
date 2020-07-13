@@ -22,6 +22,9 @@ export type ConfigOptions =
     templateEngine: {
         name: "handlebars",
     },
+    server: {
+        name: "webpack",
+    },
 }
 
 const runCommand = (command: string, cwd?: string) =>
@@ -71,15 +74,10 @@ program
         const configFilePath = path.join(projectDirPath, CONFIG_FILE_NAME);
 
         fs.writeFileSync(configFilePath, JSON.stringify(<ConfigOptions>{
-            bundler: {
-                name: "webpack",
-            },
-            linter: {
-                name: "eslint",
-            },
-            templateEngine: {
-                name: "handlebars",
-            },
+            bundler: { name: "webpack" },
+            linter: { name: "eslint" },
+            templateEngine: { name: "handlebars" },
+            server: { name: "webpack" },
         }, null, 4));
 
         [
@@ -143,6 +141,16 @@ program
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
         runCommand(`npm run build:${configOptions.templateEngine.name}`);
+    });
+
+program
+    .command("serve")
+    .description("Create a local development server")
+    .action(() =>
+    {
+        const configOptions = getConfigOptions();
+
+        runCommand(`npm run serve:${configOptions.server.name}`);
     });
 
 program.parse(process.argv);

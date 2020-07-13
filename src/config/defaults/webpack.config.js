@@ -22,7 +22,10 @@ exports.default = [
             ],
         },
         resolve: {
-            extensions: [ ".ts" ],
+            extensions: [ ".ts", ".js" ],
+        },
+        devServer: {
+            contentBase: "./public",
         },
         output: {
             filename: "[name].[contenthash].js",
