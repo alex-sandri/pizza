@@ -134,6 +134,19 @@ program
                 logError(`Unsupported bundler: ${configOptions.bundler.name}`);
             break;
         }
+
+        switch (configOptions.templateEngine.name)
+        {
+            case "handlebars":
+                fs.copySync(
+                    path.join(DEFAULT_FILES_PATH, "src", "hbs"),
+                    path.join(projectDirPath, "src", "hbs"),
+                );
+            break;
+            default:
+                logError(`Unsupported template engine: ${configOptions.templateEngine.name}`);
+            break;
+        }
     });
 
 program
