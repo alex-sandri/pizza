@@ -6,6 +6,7 @@ const pkg = require("../package.json");
 
 import { program } from "commander";
 import * as chalk from "chalk";
+import * as glob from "glob";
 
 const validateNpmPackageName = require("validate-npm-package-name");
 
@@ -94,17 +95,10 @@ program
         fs.copySync(DEFAULT_FILES_PATH, projectDirPath, {
             filter: filePath =>
             {
-                const excluded = {
-                    files: [
-                        "webpack.config.js",
-                    ],
-                    folders: [
-                        path.join(DEFAULT_FILES_PATH, "src", "hbs"),
-                    ],
-                };
+                const fileName = path.basename(filePath);
 
-                const exclude = excluded.files.includes(filePath)
-                    || excluded.folders.some(folderPath => filePath.startsWith(folderPath));
+                const exclude = fileName === "webpack.config.js"
+                    || fileName.endsWith(".hbs");
 
                 return !exclude;
             },
@@ -136,10 +130,12 @@ program
         switch (configOptions.templateEngine.name)
         {
             case "handlebars":
-                fs.copySync(
-                    path.join(DEFAULT_FILES_PATH, "src", "hbs"),
-                    path.join(projectDirPath, "src", "hbs"),
-                );
+                glob.sync(path.join(DEFAULT_FILES_PATH, "src", "routes", "**", "*.hbs")).forEach(filePath =>
+                {
+                    const route = path.basename(path.dirname(filePath));
+
+                    fs.copyFileSync(filePath, path.join(projectDirPath, "src", "routes", route, path.basename(filePath)));
+                });
             break;
             default:
                 logError(`Unsupported template engine: '${configOptions.templateEngine.name}'`);

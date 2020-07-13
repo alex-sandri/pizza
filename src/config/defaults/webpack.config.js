@@ -5,7 +5,7 @@ const glob = require("glob");
 
 exports.default = [
     {
-        entry: glob.sync("./src/ts/*.ts").reduce((entries, entry) =>
+        entry: glob.sync("./src/routes/**/*.ts").reduce((entries, entry) =>
         {
             const entryName = entry.split("/").pop().split(".")[0];
 
@@ -33,7 +33,7 @@ exports.default = [
         },
     },
     {
-        entry: glob.sync("./src/scss/*.scss").reduce((entries, entry) =>
+        entry: glob.sync("./src/routes/**/*.scss").reduce((entries, entry) =>
         {
             const entryName = entry.split("/").pop().split(".")[0];
 
