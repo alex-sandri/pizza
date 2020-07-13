@@ -141,6 +141,8 @@ program
         const configOptions = getConfigOptions();
 
         runCommand(`npm run build:${configOptions.bundler.name}`);
+
+        runCommand(`npm run build:${configOptions.templateEngine.name}`);
     });
 
 program.parse(process.argv);

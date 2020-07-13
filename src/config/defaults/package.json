@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "",
-    "build:webpack": "webpack"
+    "build:webpack": "webpack",
+    "build:handlebars": "node src/scripts/build-handlebars.js"
   },
   "license": "UNLICENSED",
   "private": true,
