@@ -24,6 +24,13 @@ export type ConfigOptions =
     },
 }
 
+const runCommand = (command: string, cwd?: string) =>
+    childProcess.spawnSync(command, {
+        stdio: "inherit",
+        shell: true,
+        cwd: cwd ?? process.cwd(),
+    });
+
 program.version(pkg.version);
     
 program
@@ -66,10 +73,10 @@ program
         }, null, 4));
     
         const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(configFilePath).toString());
+
+        runCommand("npm init -y", projectDirPath);
     
-        childProcess.spawnSync("npm init -y", { stdio: "inherit", shell: true });
-    
-        childProcess.spawnSync(`npm i -D ${[
+        runCommand(`npm i -D ${[
             "typescript",
             "webpack",
             "webpack-cli",
@@ -80,7 +87,7 @@ program
             "css-loader",
             "scss-loader",
             "sass",
-        ].join(" ")}`, { stdio: "inherit", shell: true });
+        ].join(" ")}`, projectDirPath);
     
         [
             path.join(process.cwd(), "public", "assets", "css"),
