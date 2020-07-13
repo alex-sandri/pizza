@@ -32,7 +32,7 @@ exports.default = [
         {
             const entryName = entry.split("/").pop().split(".")[0];
 
-            entries[entryName] = entry;
+            return entries[entryName] = entry;
         }, {}),
         output: {
             filename: "[name].style.js",
