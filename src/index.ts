@@ -127,7 +127,13 @@ program
     .description("Build the project")
     .action(() =>
     {
+        if (!fs.existsSync(path.join(process.cwd(), CONFIG_FILE_NAME)))
+        {
+            logError(`Cannot find '${CONFIG_FILE_NAME}' config file`);
+            console.log("Try running 'pizza init <name>' first");
 
+            return;
+        }
     });
 
 program.parse(process.argv);
