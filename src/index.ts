@@ -123,11 +123,9 @@ program
         switch (configOptions.bundler.name)
         {
             case "webpack":
-                fs.writeFileSync(
-                    path.join(projectDirPath, "webpack.config.js"),
-                    fs.readFileSync(
-                        path.join(DEFAULT_FILES_PATH, "webpack.config.js"),
-                    ),
+                fs.copyFileSync(
+                    path.join(DEFAULT_FILES_PATH, "webpack.config.js"),
+                    path.join(projectDirPath, "webpack.config.js")
                 );
             break;
             default:
