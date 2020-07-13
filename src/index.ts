@@ -97,10 +97,10 @@ program
         ].join(" ")}`, projectDirPath);
     
         [
-            path.join(process.cwd(), "public", "assets", "css"),
-            path.join(process.cwd(), "public", "assets", "js"),
-            path.join(process.cwd(), "src", "scss"),
-            path.join(process.cwd(), "src", "ts"),
+            path.join(projectDirPath, "public", "assets", "css"),
+            path.join(projectDirPath, "public", "assets", "js"),
+            path.join(projectDirPath, "src", "scss"),
+            path.join(projectDirPath, "src", "ts"),
         ].forEach(dir =>
         {
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
@@ -110,7 +110,7 @@ program
         {
             case "webpack":
                 fs.writeFileSync(
-                    path.join(process.cwd(), "webpack.config.js"),
+                    path.join(projectDirPath, "webpack.config.js"),
                     fs.readFileSync(
                         path.join(__dirname, "config", "defaults", "webpack.config.js"),
                     ),
