@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "commander": "^5.1.0"
+    "commander": "^5.1.0",
+    "validate-npm-package-name": "^3.0.0"
   },
   "directories": {
     "lib": "lib"

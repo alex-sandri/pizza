@@ -7,6 +7,8 @@ const pkg = require("../package.json");
 import { program } from "commander";
 import * as chalk from "chalk";
 
+const validateNpmPackageName = require("validate-npm-package-name");
+
 const CONFIG_FILE_NAME = "ingredients.pizza";
 const CONFIG_FILE_PATH = path.join(process.cwd(), CONFIG_FILE_NAME);
 
@@ -30,6 +32,15 @@ program
     .description("Create named project")
     .action(name =>
     {
+        const validationResult = validateNpmPackageName(name);
+
+        if (!validationResult.validForNewPackages)
+        {
+            validationResult.errors.forEach(console.log);
+
+            return;
+        }
+
         if (fs.existsSync(path.join(process.cwd(), name)))
         {
             console.log(chalk.red("Error:"), `A folder named '${name}' already exists`);
