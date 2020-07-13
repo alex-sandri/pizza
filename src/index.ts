@@ -23,69 +23,79 @@ export type ConfigOptions =
     },
 }
 
+program.version(pkg.version);
+    
 program
-    .version(pkg.version)
     .command("init <name>", "Create named project")
-    .command("make", "Build the project")
-    .parse(process.argv);
-
-if (program.init)
-{
-    fs.writeFileSync(CONFIG_FILE_PATH, JSON.stringify(<ConfigOptions>{
-        bundler: {
-            name: "webpack",
-        },
-        linter: {
-            name: "eslint",
-        },
-        templateEngine: {
-            name: "handlebars",
-        },
-    }, null, 4));
-
-    const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
-
-    childProcess.spawnSync("npm init -y", { stdio: "inherit", shell: true });
-
-    childProcess.spawnSync(`npm i -D ${[
-        "typescript",
-        "webpack",
-        "webpack-cli",
-        "glob",
-        "ts-loader",
-        "file-loader",
-        "extract-loader",
-        "css-loader",
-        "scss-loader",
-        "sass",
-    ].join(" ")}`, { stdio: "inherit", shell: true });
-
-    [
-        path.join(process.cwd(), "public", "assets", "css"),
-        path.join(process.cwd(), "public", "assets", "js"),
-        path.join(process.cwd(), "src", "scss"),
-        path.join(process.cwd(), "src", "ts"),
-    ].forEach(dir =>
+    .action(name =>
     {
-        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        if (fs.existsSync(path.join(process.cwd(), name)))
+        {
+            console.log(chalk.red("Error:"), `A folder named '${name}' already exists`);
+
+            return;
+        }
+
+        fs.mkdirSync(path.join(process.cwd(), name));
+
+        fs.writeFileSync(CONFIG_FILE_PATH, JSON.stringify(<ConfigOptions>{
+            bundler: {
+                name: "webpack",
+            },
+            linter: {
+                name: "eslint",
+            },
+            templateEngine: {
+                name: "handlebars",
+            },
+        }, null, 4));
+    
+        const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(CONFIG_FILE_PATH).toString());
+    
+        childProcess.spawnSync("npm init -y", { stdio: "inherit", shell: true });
+    
+        childProcess.spawnSync(`npm i -D ${[
+            "typescript",
+            "webpack",
+            "webpack-cli",
+            "glob",
+            "ts-loader",
+            "file-loader",
+            "extract-loader",
+            "css-loader",
+            "scss-loader",
+            "sass",
+        ].join(" ")}`, { stdio: "inherit", shell: true });
+    
+        [
+            path.join(process.cwd(), "public", "assets", "css"),
+            path.join(process.cwd(), "public", "assets", "js"),
+            path.join(process.cwd(), "src", "scss"),
+            path.join(process.cwd(), "src", "ts"),
+        ].forEach(dir =>
+        {
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        });
+    
+        switch (configOptions.bundler.name)
+        {
+            case "webpack":
+                fs.writeFileSync(
+                    path.join(process.cwd(), "webpack.config.js"),
+                    fs.readFileSync(
+                        path.join(__dirname, "config", "defaults", "webpack.config.js"),
+                    ),
+                );
+            break;
+            default:
+                console.log(chalk.red("Error:"), `Unsupported bundler: ${configOptions.bundler.name}`);
+            break;
+        }
     });
 
-    switch (configOptions.bundler.name)
+program
+    .command("make", "Build the project")
+    .action(() =>
     {
-        case "webpack":
-            fs.writeFileSync(
-                path.join(process.cwd(), "webpack.config.js"),
-                fs.readFileSync(
-                    path.join(__dirname, "config", "defaults", "webpack.config.js"),
-                ),
-            );
-        break;
-        default:
-            console.log(chalk.red("Error:"), `Unsupported bundler: ${configOptions.bundler.name}`);
-        break;
-    }
-}
-else if (program.make)
-{
-    // TODO
-}
+
+    });
