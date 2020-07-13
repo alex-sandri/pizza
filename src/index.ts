@@ -26,7 +26,8 @@ export type ConfigOptions =
 program.version(pkg.version);
     
 program
-    .command("init <name>", "Create named project")
+    .command("init <name>")
+    .description("Create named project")
     .action(name =>
     {
         if (fs.existsSync(path.join(process.cwd(), name)))
@@ -94,7 +95,8 @@ program
     });
 
 program
-    .command("make", "Build the project")
+    .command("make")
+    .description("Build the project")
     .action(() =>
     {
 
