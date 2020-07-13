@@ -152,6 +152,7 @@ program
             return;
         }
 
+        // TODO: Change based on config file bundler
         runCommand("npx webpack");
     });
 
