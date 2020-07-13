@@ -144,8 +144,9 @@ program
             return;
         }
 
-        // TODO: Change based on config file bundler
-        runCommand("npx webpack");
+        const configOptions = getConfigOptions();
+
+        runCommand(`npm run build:${configOptions.bundler.name}`);
     });
 
 program.parse(process.argv);
