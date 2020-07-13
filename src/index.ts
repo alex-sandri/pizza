@@ -117,7 +117,7 @@ program
             path.join(__dirname, "config", "defaults", "tsconfig.json"),
             // Destination path
             projectDirPath,
-        ], { up: 2 });
+        ], { up: 2 }, () => {});
     
         switch (configOptions.bundler.name)
         {
