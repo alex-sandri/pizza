@@ -1,9 +1,14 @@
+const path = require("path");
 const fs = require("fs");
 const handlebars = require("handlebars");
 const glob = require("glob");
 
-const jsFiles = glob.sync("../../public/assets/js/*.*.js");
-const cssFiles = glob.sync("../../public/assets/css/*.*.css");
+const PUBLIC_PATH = path.join(__dirname, "..", "..", "public");
+const ASSETS_PATH = path.join(PUBLIC_PATH, "assets");
+const HANDLEBARS_PATH = path.join(__dirname, "..", "hbs");
+
+const jsFiles = glob.sync(path.join(ASSETS_PATH, "js", "*.*.js"));
+const cssFiles = glob.sync(path.join(ASSETS_PATH, "css", "*.*.css"));
 
 jsFiles.forEach(jsFile =>
 {
@@ -15,7 +20,7 @@ jsFiles.forEach(jsFile =>
 
     const cssFileName = cssFile.split("/").pop();
 
-    fs.writeFileSync(`../../public/${fileNamePrefix}.html`, handlebars.compile(fs.readFileSync(`../hbs/${fileNamePrefix}.hbs`, "utf8"))({
+    fs.writeFileSync(path.join(PUBLIC_PATH, `${fileNamePrefix}.html`), handlebars.compile(fs.readFileSync(path.join(HANDLEBARS_PATH, `${fileNamePrefix}.hbs`), "utf8"))({
         assets: {
             js: jsFileName,
             css: cssFileName,
