@@ -9,7 +9,9 @@ exports.default = [
         {
             const entryName = entry.split("/").pop().split(".")[0];
 
-            return entries[entryName] = entry;
+            entries[entryName] = entry;
+
+            return entries;
         }, {}),
         module: {
             rules: [
@@ -32,7 +34,9 @@ exports.default = [
         {
             const entryName = entry.split("/").pop().split(".")[0];
 
-            return entries[entryName] = entry;
+            entries[entryName] = entry;
+
+            return entries;
         }, {}),
         output: {
             filename: "[name].style.js",
