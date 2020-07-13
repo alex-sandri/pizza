@@ -105,18 +105,7 @@ program
 
         fs.writeJSONSync(path.join(projectDirPath, "package.json"), defaultNpmPackage);
     
-        runCommand(`npm i -D ${[
-            "typescript",
-            "webpack",
-            "webpack-cli",
-            "glob",
-            "ts-loader",
-            "file-loader",
-            "extract-loader",
-            "css-loader",
-            "sass-loader",
-            "sass",
-        ].join(" ")}`, projectDirPath);
+        runCommand("npm i", projectDirPath);
 
         const configOptions = getConfigOptions(projectDirPath);
     
