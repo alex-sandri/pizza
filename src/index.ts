@@ -85,8 +85,6 @@ program
         [
             path.join(projectDirPath, "public", "assets", "css"),
             path.join(projectDirPath, "public", "assets", "js"),
-            path.join(projectDirPath, "src", "scss"),
-            path.join(projectDirPath, "src", "ts"),
         ].forEach(dir =>
         {
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
