@@ -33,6 +33,9 @@ const runCommand = (command: string, cwd?: string) =>
 
 const logError = (message: string) => console.log(chalk.red("Error:"), message);
 
+const getConfigOptions = (cwd?: string): ConfigOptions =>
+    <ConfigOptions>JSON.parse(fs.readFileSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME)).toString());
+
 program.version(pkg.version);
     
 program
@@ -79,7 +82,7 @@ program
             },
         }, null, 4));
     
-        const configOptions = <ConfigOptions>JSON.parse(fs.readFileSync(configFilePath).toString());
+        const configOptions = getConfigOptions(projectDirPath);
 
         runCommand("npm init -y", projectDirPath);
     
@@ -148,6 +151,8 @@ program
 
             return;
         }
+
+        runCommand("npx webpack");
     });
 
 program.parse(process.argv);
