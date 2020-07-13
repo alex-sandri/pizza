@@ -92,7 +92,12 @@ program
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
 
-        fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath);
+        fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath, {
+            filter: filePath =>
+                [
+                    "webpack.config.js"
+                ].includes(path.basename(filePath)),
+        });
 
         const defaultNpmPackage = fs.readJSONSync(path.join(__dirname, "config", "defaults", "package.json"));
 
