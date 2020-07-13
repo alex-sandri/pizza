@@ -41,14 +41,16 @@ program
             return;
         }
 
-        if (fs.existsSync(path.join(process.cwd(), name)))
+        const projectDirPath = path.join(process.cwd(), name);
+
+        if (fs.existsSync(projectDirPath))
         {
             console.log(chalk.red("Error:"), `A folder named '${name}' already exists`);
 
             return;
         }
 
-        fs.mkdirSync(path.join(process.cwd(), name));
+        fs.mkdirSync(projectDirPath);
 
         fs.writeFileSync(CONFIG_FILE_PATH, JSON.stringify(<ConfigOptions>{
             bundler: {
