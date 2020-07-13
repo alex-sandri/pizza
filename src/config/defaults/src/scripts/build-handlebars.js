@@ -11,7 +11,7 @@ jsFiles.forEach(jsFile =>
 
     const fileNamePrefix = jsFileName.split(".")[0];
 
-    const cssFile = cssFiles.filter(cssFile => cssFile.split("/").pop() === `${fileNamePrefix}.css`)[0];
+    const cssFile = cssFiles.filter(cssFile => cssFile.split("/").pop().startsWith(`${fileNamePrefix}.`))[0];
 
     const cssFileName = cssFile.split("/").pop();
 
