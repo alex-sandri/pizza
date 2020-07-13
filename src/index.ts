@@ -44,11 +44,12 @@ program
             validForNewPackages: boolean,
             validForOldPackages: boolean,
             errors?: string[],
+            warnings?: string[],
         } = validateNpmPackageName(name);
 
         if (!validationResult.validForNewPackages)
         {
-            (<string[]>validationResult.errors).forEach(logError);
+            (<string[]>(validationResult.errors ?? validationResult.warnings)).forEach(logError);
 
             return;
         }
