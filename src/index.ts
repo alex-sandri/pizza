@@ -10,6 +10,7 @@ import * as chalk from "chalk";
 const validateNpmPackageName = require("validate-npm-package-name");
 
 const CONFIG_FILE_NAME = "ingredients.pizza";
+const DEFAULT_FILES_PATH = path.join(__dirname, "config", "defaults");
 
 export type ConfigOptions =
 {
@@ -90,14 +91,26 @@ program
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
 
-        fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath, {
+        fs.copySync(DEFAULT_FILES_PATH, projectDirPath, {
             filter: filePath =>
-                ![
-                    "webpack.config.js"
-                ].includes(path.basename(filePath)),
+            {
+                const excluded = {
+                    files: [
+                        "webpack.config.js",
+                    ],
+                    folders: [
+                        path.join(DEFAULT_FILES_PATH, "src", "hbs"),
+                    ],
+                };
+
+                const exclude = excluded.files.includes(filePath)
+                    || excluded.folders.some(folderPath => filePath.startsWith(folderPath));
+
+                return !exclude;
+            },
         });
 
-        const defaultNpmPackage = fs.readJSONSync(path.join(__dirname, "config", "defaults", "package.json"));
+        const defaultNpmPackage = fs.readJSONSync(path.join(DEFAULT_FILES_PATH, "package.json"));
 
         defaultNpmPackage.name = name;
 
@@ -113,7 +126,7 @@ program
                 fs.writeFileSync(
                     path.join(projectDirPath, "webpack.config.js"),
                     fs.readFileSync(
-                        path.join(__dirname, "config", "defaults", "webpack.config.js"),
+                        path.join(DEFAULT_FILES_PATH, "webpack.config.js"),
                     ),
                 );
             break;
