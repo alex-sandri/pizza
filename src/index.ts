@@ -129,7 +129,7 @@ program
                 );
             break;
             default:
-                logError(`Unsupported bundler: ${configOptions.bundler.name}`);
+                logError(`Unsupported bundler: '${configOptions.bundler.name}'`);
             break;
         }
 
@@ -142,7 +142,7 @@ program
                 );
             break;
             default:
-                logError(`Unsupported template engine: ${configOptions.templateEngine.name}`);
+                logError(`Unsupported template engine: '${configOptions.templateEngine.name}'`);
             break;
         }
     });
