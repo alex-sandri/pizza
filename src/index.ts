@@ -34,7 +34,7 @@ const runCommand = (command: string, cwd?: string) =>
 const logError = (message: string) => console.log(chalk.red("Error:"), message);
 
 const getConfigOptions = (cwd?: string): ConfigOptions =>
-    <ConfigOptions>JSON.parse(fs.readFileSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME)).toString());
+    <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME));
 
 program.version(pkg.version);
     
