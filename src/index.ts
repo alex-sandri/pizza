@@ -105,6 +105,20 @@ program
         {
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
+
+        fs.writeFileSync(
+            path.join(projectDirPath, "src", "scss", "main.scss"),
+            fs.readFileSync(
+                path.join(__dirname, "config", "defaults", "scss", "main.scss"),
+            ),
+        );
+
+        fs.writeFileSync(
+            path.join(projectDirPath, "src", "ts", "index.ts"),
+            fs.readFileSync(
+                path.join(__dirname, "config", "defaults", "ts", "index.ts"),
+            ),
+        );
     
         switch (configOptions.bundler.name)
         {
