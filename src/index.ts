@@ -81,8 +81,18 @@ program
                 name: "handlebars",
             },
         }, null, 4));
-    
-        const configOptions = getConfigOptions(projectDirPath);
+
+        [
+            path.join(projectDirPath, "public", "assets", "css"),
+            path.join(projectDirPath, "public", "assets", "js"),
+            path.join(projectDirPath, "src", "scss"),
+            path.join(projectDirPath, "src", "ts"),
+        ].forEach(dir =>
+        {
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        });
+
+        fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath);
 
         runCommand("npm init -y", projectDirPath);
     
@@ -98,18 +108,8 @@ program
             "sass-loader",
             "sass",
         ].join(" ")}`, projectDirPath);
-    
-        [
-            path.join(projectDirPath, "public", "assets", "css"),
-            path.join(projectDirPath, "public", "assets", "js"),
-            path.join(projectDirPath, "src", "scss"),
-            path.join(projectDirPath, "src", "ts"),
-        ].forEach(dir =>
-        {
-            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-        });
 
-        fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath);
+        const configOptions = getConfigOptions(projectDirPath);
     
         switch (configOptions.bundler.name)
         {
