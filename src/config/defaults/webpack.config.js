@@ -35,7 +35,7 @@ exports.default = [
             entries[entryName] = entry;
         }, {}),
         output: {
-            filename: "style-bundle.js",
+            filename: "[name].style.js",
             path: path.resolve(__dirname, "public/assets/css"),
         },
         module: {
@@ -46,7 +46,7 @@ exports.default = [
                         {
                             loader: "file-loader",
                             options: {
-                                name: "bundle.[contenthash].css",
+                                name: "[name].[contenthash].css",
                             },
                         },
                         {
