@@ -94,7 +94,7 @@ program
 
         fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath, {
             filter: filePath =>
-                [
+                ![
                     "webpack.config.js"
                 ].includes(path.basename(filePath)),
         });
