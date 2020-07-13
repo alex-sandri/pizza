@@ -1,5 +1,5 @@
 import * as path from "path";
-import * as fs from "fs";
+import * as fs from "fs-extra";
 import * as childProcess from "child_process";
 
 const pkg = require("../package.json");
@@ -8,7 +8,6 @@ import { program } from "commander";
 import * as chalk from "chalk";
 
 const validateNpmPackageName = require("validate-npm-package-name");
-const copyFiles = require("copyfiles");
 
 const CONFIG_FILE_NAME = "ingredients.pizza";
 
@@ -110,14 +109,7 @@ program
             if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
         });
 
-        copyFiles([
-            // Source paths
-            path.join(__dirname, "config", "defaults", "src", "scss", "main.scss"),
-            path.join(__dirname, "config", "defaults", "src", "ts", "index.ts"),
-            path.join(__dirname, "config", "defaults", "tsconfig.json"),
-            // Destination path
-            projectDirPath,
-        ], { up: 2 }, () => {});
+        fs.copySync(path.join(__dirname, "config", "defaults"), projectDirPath);
     
         switch (configOptions.bundler.name)
         {
