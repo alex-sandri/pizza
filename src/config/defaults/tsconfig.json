@@ -3,7 +3,8 @@
         "target": "ESNext",
         "module": "ESNext",
         "strict": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "moduleResolution": "node"
     },
     "include": [ "src/ts" ]
 }
