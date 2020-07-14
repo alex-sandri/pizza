@@ -10,7 +10,7 @@ import * as glob from "glob";
 
 const validateNpmPackageName = require("validate-npm-package-name");
 
-const CONFIG_FILE_NAME = "ingredients.pizza";
+const CONFIG_FILE_NAME = "pizza.json";
 const DEFAULT_FILES_PATH = path.join(__dirname, "config", "defaults");
 
 export type ConfigOptions =
