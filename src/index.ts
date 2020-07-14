@@ -173,13 +173,22 @@ generateCommand.command("route <name>")
             return;
         }
 
+        const routePath = path.join(process.cwd(), "src", "routes", name);
+
+        if (fs.existsSync(routePath))
+        {
+            logError(`A route named '${name}' already exists`);
+
+            return;
+        }
+
         const configOptions = getConfigOptions();
 
         if (!configOptions) return;
 
-        fs.copySync(path.join(DEFAULT_FILES_PATH, "src", "routes", "index"), path.join(process.cwd(), "src", "routes", name));
+        fs.copySync(path.join(DEFAULT_FILES_PATH, "src", "routes", "index"), routePath);
 
-        glob.sync(path.join(process.cwd(), "src", "routes", name, "*")).forEach(filePath =>
+        glob.sync(path.join(routePath, "*")).forEach(filePath =>
         {
             // Replace default file name with the new route name: index.ts -> <name>.ts
             const newFileName = path.basename(filePath).replace("index", name);
