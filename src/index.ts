@@ -38,8 +38,18 @@ const runCommand = (command: string, cwd?: string) =>
 
 const logError = (message: string) => console.log(chalk.red("Error:"), message);
 
-const getConfigOptions = (cwd?: string): ConfigOptions =>
-    <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME));
+const getConfigOptions = (cwd?: string): ConfigOptions | undefined =>
+{
+    if (!fs.existsSync(path.join(process.cwd(), CONFIG_FILE_NAME)))
+    {
+        logError(`Cannot find '${CONFIG_FILE_NAME}' config file`);
+        console.log("Try running 'pizza init <name>' first");
+
+        return;
+    }
+
+    return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME))
+};
 
 program.version(pkg.version);
     
@@ -110,7 +120,7 @@ program
     
         runCommand("npm i", projectDirPath);
 
-        const configOptions = getConfigOptions(projectDirPath);
+        const configOptions = <ConfigOptions>getConfigOptions(projectDirPath);
     
         switch (configOptions.bundler.name)
         {
@@ -146,15 +156,9 @@ program
     .description("Build the project")
     .action(() =>
     {
-        if (!fs.existsSync(path.join(process.cwd(), CONFIG_FILE_NAME)))
-        {
-            logError(`Cannot find '${CONFIG_FILE_NAME}' config file`);
-            console.log("Try running 'pizza init <name>' first");
-
-            return;
-        }
-
         const configOptions = getConfigOptions();
+
+        if (!configOptions) return;
 
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
@@ -167,6 +171,8 @@ program
     .action(() =>
     {
         const configOptions = getConfigOptions();
+
+        if (!configOptions) return;
 
         runCommand(`npm run serve:${configOptions.server.name}`);
     });
