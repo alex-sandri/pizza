@@ -23,10 +23,10 @@ pizza init <name> [--firebase]
 cd <name>
 ```
 
-This will create a folder named `<name>` and the basic files to get you started immediately
+This will create a folder named `<name>` and the basic files to get you started immediately.
 
-Adding the `--firebase` option will, after the initial configuration process, run the `firebase init` command to configure Firebase with this project.
-For this to work you need to install `firebase-tools` globally
+Adding the `--firebase` option will, after the initial configuration process, run the `firebase init` command to configure Firebase with this project.  
+For this to work you need to install `firebase-tools` globally.
 
 ### Build the project
 
@@ -45,12 +45,12 @@ This will create a new route folder inside `src/routes` with these files:
  - `<name>.scss`
  - `<name>.ts`
 
-Once the project is built the route will be accessible from `/<name>.html`
+Once the project is built the route will be accessible from `/<name>.html`.
 
 ### Generate a new component
 
 `pizza generate component <name>`
 
-This will create a new folder inside `src/components` with a file named `<name>.hbs`
+This will create a new folder inside `src/components` with a file named `<name>.hbs`.
 
-Include this component inside another `.hbs` file using this syntax: `{{> <name>}}`
+Include this component inside another `.hbs` file using this syntax: `{{> <name>}}`.
