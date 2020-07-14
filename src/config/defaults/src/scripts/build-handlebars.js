@@ -6,28 +6,38 @@ const glob = require("glob");
 const PUBLIC_PATH = path.join(__dirname, "..", "..", "public");
 const ASSETS_PATH = path.join(PUBLIC_PATH, "assets");
 
-const jsFiles = glob.sync(path.join(ASSETS_PATH, "js", "*.*.js"));
-const cssFiles = glob.sync(path.join(ASSETS_PATH, "css", "*.*.css"));
-
-jsFiles.forEach(jsFile =>
+/**
+ * The first file is the newest
+ */
+const sortByFileCreationTime = (a, b) =>
 {
-    const jsFileName = path.basename(jsFile);
+    const aStats = fs.statSync(a);
+    const bStats = fs.statSync(b);
 
-    const fileNamePrefix = jsFileName.split(".")[0];
+    return bStats.ctime.getTime() - aStats.ctime.getTime();
+}
 
-    const cssFile = cssFiles.filter(cssFile => path.basename(cssFile).startsWith(`${fileNamePrefix}.`))[0];
+const getDirectories = (path) =>
+    fs
+        .readdirSync(path, { withFileTypes: true })
+        .filter(entry => entry.isDirectory())
+        .map(entry => entry.name);
 
-    const cssFileName = path.basename(cssFile);
+const routes = getDirectories(path.join(__dirname, "..", "routes"));
+
+routes.forEach(route =>
+{
+    const data = {
+        assets: {
+            js: path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.*.js`)).sort(sortByFileCreationTime)[0]),
+            css: path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.*.css`)).sort(sortByFileCreationTime)[0]),
+        },
+    };
 
     fs.writeFileSync(
-        path.join(PUBLIC_PATH, `${fileNamePrefix}.html`),
+        path.join(PUBLIC_PATH, `${route}.html`),
         handlebars.compile(
-            fs.readFileSync(path.join(__dirname, "..", "routes", fileNamePrefix, `${fileNamePrefix}.hbs`), "utf8")
-        )({
-            assets: {
-                js: jsFileName,
-                css: cssFileName,
-            },
-        }),
+            fs.readFileSync(path.join(__dirname, "..", "routes", route, `${route}.hbs`), "utf8")
+        )(data),
     );
 });
