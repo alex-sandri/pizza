@@ -12,6 +12,7 @@ A simple tool to create a web app using:
 
  * [Requirements](#requirements)
  * [Installation](#installation)
+ * [Configure](#configure)
  * [Usage](#usage)
  * [License](#license)
 
@@ -27,6 +28,10 @@ A simple tool to create a web app using:
 Before installing, make sure to authenticate with GitHub Package Registry or using a `.npmrc` file. See "[Configuring npm for use with GitHub Package Registry](https://help.github.com/en/articles/configuring-npm-for-use-with-github-package-registry#authenticating-to-github-package-registry)."
 
 `npm install -g @alex-sandri/pizza`
+
+## Configure
+
+TODO
 
 ## Usage
 
