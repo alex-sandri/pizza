@@ -52,8 +52,9 @@ program.version(pkg.version);
     
 program
     .command("init <name>")
+    .option("--firebase", "Configure project with Firebase")
     .description("Create named project")
-    .action(name =>
+    .action((name, options) =>
     {
         const validationResult: {
             validForNewPackages: boolean,
@@ -121,6 +122,8 @@ program
                 logError(`Unsupported bundler: '${configOptions.bundler.name}'`);
             break;
         }
+
+        if (options.firebase) runCommand("firebase init");
     });
 
 program
