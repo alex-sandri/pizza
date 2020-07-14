@@ -165,6 +165,10 @@ generateCommand.command("route <name>")
     .description("Generate a new route")
     .action((name: string) =>
     {
+        const configOptions = getConfigOptions();
+
+        if (!configOptions) return;
+
         if (!name.match(/^[a-z]+$/))
         {
             logError("Invalid value for 'name' argument");
@@ -172,10 +176,6 @@ generateCommand.command("route <name>")
 
             return;
         }
-
-        const configOptions = getConfigOptions();
-
-        if (!configOptions) return;
 
         const routePath = path.join(process.cwd(), "src", "routes", name);
 
@@ -201,6 +201,10 @@ generateCommand.command("component <name>")
     .description("Generate a new component")
     .action((name: string) =>
     {
+        const configOptions = getConfigOptions();
+
+        if (!configOptions) return;
+
         if (!name.match(/^[a-z]+$/))
         {
             logError("Invalid value for 'name' argument");
@@ -208,10 +212,6 @@ generateCommand.command("component <name>")
 
             return;
         }
-
-        const configOptions = getConfigOptions();
-
-        if (!configOptions) return;
 
         const componentPath = path.join(process.cwd(), "src", "components", name);
 
