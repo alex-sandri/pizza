@@ -8,6 +8,13 @@ A simple tool to create a web app using:
  - ESLint (TODO)
  - Firebase (Optional)
 
+## Table of Contents
+
+ * [Requirements](#requirements)
+ * [Installation](#installation)
+ * [Usage](#usage)
+ * [License](#license)
+
 ## Requirements
 
  - [Node.js](https://nodejs.org/)
