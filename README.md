@@ -8,6 +8,13 @@ A simple tool to create a web app using:
  - ESLint (TODO)
  - Firebase (Optional)
 
+## Requirements
+
+ - [Node.js](https://nodejs.org/)
+ - [npm](https://www.npmjs.com/) (normally comes with Node.js)
+ - [firebase-tools](https://github.com/firebase/firebase-tools) (Required only if you use the `--firebase` flag when initializing the project)
+
+
 ## Installation
 
 Before installing, make sure to authenticate with GitHub Package Registry or using a `.npmrc` file. See "[Configuring npm for use with GitHub Package Registry](https://help.github.com/en/articles/configuring-npm-for-use-with-github-package-registry#authenticating-to-github-package-registry)."
