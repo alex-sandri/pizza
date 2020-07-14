@@ -204,7 +204,7 @@ generateCommand.command("component <name>")
 
         components.components.push(name);
 
-        fs.writeJSONSync(path.join(process.cwd(), "src", "components", name, "components.json"), components);
+        fs.writeJSONSync(path.join(process.cwd(), "src", "components", "components.json"), components);
     });
 
 program.addCommand(generateCommand);
