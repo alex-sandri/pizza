@@ -156,8 +156,9 @@ program
         runCommand(`npm run serve:${configOptions.server.name}`);
     });
 
-const generateCommand = program
-    .command("generate <type>")
+const generateCommand = new commander
+    .Command("generate")
+    .arguments("<type>")
     .description("Generate files based on <type>");
 
 generateCommand.command("route <name>")
