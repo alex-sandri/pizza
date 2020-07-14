@@ -21,9 +21,6 @@ export type ConfigOptions =
     linter: {
         name: "eslint",
     },
-    templateEngine: {
-        name: "handlebars",
-    },
     server: {
         name: "webpack",
     },
@@ -96,8 +93,7 @@ program
             {
                 const fileName = path.basename(filePath);
 
-                const exclude = fileName === "webpack.config.js"
-                    || fileName.endsWith(".hbs");
+                const exclude = fileName === "webpack.config.js";
 
                 return !exclude;
             },
@@ -125,21 +121,6 @@ program
                 logError(`Unsupported bundler: '${configOptions.bundler.name}'`);
             break;
         }
-
-        switch (configOptions.templateEngine.name)
-        {
-            case "handlebars":
-                glob.sync(path.join(DEFAULT_FILES_PATH, "src", "routes", "**", "*.hbs")).forEach(filePath =>
-                {
-                    const route = path.basename(path.dirname(filePath));
-
-                    fs.copyFileSync(filePath, path.join(projectDirPath, "src", "routes", route, path.basename(filePath)));
-                });
-            break;
-            default:
-                logError(`Unsupported template engine: '${configOptions.templateEngine.name}'`);
-            break;
-        }
     });
 
 program
@@ -153,7 +134,7 @@ program
 
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
-        runCommand(`npm run build:${configOptions.templateEngine.name}`);
+        runCommand(`npm run build:handlebars`);
     });
 
 program
