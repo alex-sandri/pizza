@@ -1,0 +1,14 @@
+{
+    "bundler": {
+        "name": "webpack"
+    },
+    "linter": {
+        "name": "eslint"
+    },
+    "templateEngine": {
+        "name": "handlebars"
+    },
+    "server": {
+        "name": "webpack"
+    }
+}

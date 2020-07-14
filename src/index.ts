@@ -83,15 +83,6 @@ program
 
         fs.mkdirSync(projectDirPath);
 
-        const configFilePath = path.join(projectDirPath, CONFIG_FILE_NAME);
-
-        fs.writeFileSync(configFilePath, JSON.stringify(<ConfigOptions>{
-            bundler: { name: "webpack" },
-            linter: { name: "eslint" },
-            templateEngine: { name: "handlebars" },
-            server: { name: "webpack" },
-        }, null, 4));
-
         [
             path.join(projectDirPath, "public", "assets", "css"),
             path.join(projectDirPath, "public", "assets", "js"),
