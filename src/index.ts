@@ -6,7 +6,7 @@ import * as childProcess from "child_process";
 
 const pkg = require("../package.json");
 
-import { program } from "commander";
+import * as commander from "commander";
 import * as chalk from "chalk";
 import * as glob from "glob";
 
@@ -49,6 +49,8 @@ const getConfigOptions = (cwd?: string): ConfigOptions | undefined =>
 
     return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME))
 };
+
+const program = new commander.Command();
 
 program.version(pkg.version);
     
