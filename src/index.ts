@@ -213,9 +213,18 @@ generateCommand.command("component <name>")
 
         if (!configOptions) return;
 
-        fs.mkdirSync(path.join(process.cwd(), "src", "components", name));
+        const componentPath = path.join(process.cwd(), "src", "components", name);
 
-        fs.createFileSync(path.join(process.cwd(), "src", "components", name, `${name}.hbs`));
+        if (fs.existsSync(componentPath))
+        {
+            logError(`A component named '${name}' already exists`);
+
+            return;
+        }
+
+        fs.mkdirSync(componentPath);
+
+        fs.createFileSync(path.join(componentPath, `${name}.hbs`));
     });
 
 program.addCommand(generateCommand);
