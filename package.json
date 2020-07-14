@@ -1,7 +1,7 @@
 {
   "name": "@alex-sandri/pizza",
   "version": "1.0.0",
-  "description": "TODO",
+  "description": "A simple tool to start building a web app as quickly as possible",
   "main": "lib/index.js",
   "bin": {
     "pizza": "lib/index.js"
