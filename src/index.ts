@@ -22,7 +22,7 @@ export type ConfigOptions =
         name: "eslint",
     },
     server: {
-        name: "webpack",
+        name: "webpack" | "firebase",
     },
 }
 
