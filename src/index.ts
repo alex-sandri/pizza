@@ -168,4 +168,37 @@ program
         runCommand(`npm run serve:${configOptions.server.name}`);
     });
 
+const generateCommand = program
+    .command("generate <type>")
+    .description("Generate files based on <type>");
+
+generateCommand.command("route <name>")
+    .description("Generate a new route")
+    .action((name: string) =>
+    {
+        if (!name.match(/^[a-z]+$/))
+        {
+            logError("Invalid value for 'name' argument");
+            console.log("'name' can only include lowercase letters");
+
+            return;
+        }
+
+        const configOptions = getConfigOptions();
+
+        if (!configOptions) return;
+
+        fs.copySync(path.join(DEFAULT_FILES_PATH, "src", "routes", "index"), path.join(process.cwd(), "src", "routes", name));
+
+        glob.sync(path.join(process.cwd(), "src", "routes", name, "*")).forEach(filePath =>
+        {
+            // Replace default file name with the new route name: index.ts -> <name>.ts
+            const newFileName = path.basename(filePath).replace("index", name);
+
+            fs.renameSync(filePath, path.join(path.dirname(filePath), newFileName));
+        });
+    });
+
+program.addCommand(generateCommand);
+
 program.parse(process.argv);
