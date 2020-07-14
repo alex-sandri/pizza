@@ -42,5 +42,8 @@
   "bugs": {
     "url": "https://github.com/alex-sandri/pizza/issues"
   },
-  "homepage": "https://github.com/alex-sandri/pizza#readme"
+  "homepage": "https://github.com/alex-sandri/pizza#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
