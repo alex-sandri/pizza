@@ -6,7 +6,7 @@ A simple tool to create a web app using:
  - Handlebars
  - webpack
  - ESLint (TODO)
- - Firebase (TODO)
+ - Firebase (Optional)
 
 ## Installation
 
@@ -19,11 +19,14 @@ Before installing, make sure to authenticate with GitHub Package Registry or usi
 ### Create a new project
 
 ```
-pizza init <name>
+pizza init <name> [--firebase]
 cd <name>
 ```
 
 This will create a folder named `<name>` and the basic files to get you started immediately
+
+Adding the `--firebase` option will, after the initial configuration process, run the `firebase init` command to configure Firebase with this project.
+For this to work you need to install `firebase-tools` globally
 
 ### Build the project
 
