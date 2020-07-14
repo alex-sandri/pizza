@@ -173,6 +173,10 @@ generateCommand.command("route <name>")
             return;
         }
 
+        const configOptions = getConfigOptions();
+
+        if (!configOptions) return;
+
         const routePath = path.join(process.cwd(), "src", "routes", name);
 
         if (fs.existsSync(routePath))
@@ -181,10 +185,6 @@ generateCommand.command("route <name>")
 
             return;
         }
-
-        const configOptions = getConfigOptions();
-
-        if (!configOptions) return;
 
         fs.copySync(path.join(DEFAULT_FILES_PATH, "src", "routes", "index"), routePath);
 
