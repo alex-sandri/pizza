@@ -199,6 +199,33 @@ generateCommand.command("route <name>")
         });
     });
 
+generateCommand.command("component <name>")
+    .description("Generate a new component")
+    .action((name: string) =>
+    {
+        if (!name.match(/^[a-z]+$/))
+        {
+            logError("Invalid value for 'name' argument");
+            console.log("'name' can only include lowercase letters");
+
+            return;
+        }
+
+        const configOptions = getConfigOptions();
+
+        if (!configOptions) return;
+
+        fs.mkdirSync(path.join(process.cwd(), "src", "components", name));
+
+        fs.createFileSync(path.join(process.cwd(), "src", "components", name, `${name}.hbs`));
+
+        const components = fs.readJSONSync(path.join(process.cwd(), "src", "components", "components.json"));
+
+        components.components.push(name);
+
+        fs.writeJSONSync(path.join(process.cwd(), "src", "components", name, "components.json"), components);
+    });
+
 program.addCommand(generateCommand);
 
 program.parse(process.argv);
