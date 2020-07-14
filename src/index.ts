@@ -40,7 +40,7 @@ const logError = (message: string) => console.log(chalk.red("Error:"), message);
 
 const getConfigOptions = (cwd?: string): ConfigOptions | undefined =>
 {
-    if (!fs.existsSync(path.join(process.cwd(), CONFIG_FILE_NAME)))
+    if (!fs.existsSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME)))
     {
         logError(`Cannot find '${CONFIG_FILE_NAME}' config file`);
         console.log("Try running 'pizza init <name>' first");
