@@ -199,12 +199,6 @@ generateCommand.command("component <name>")
         fs.mkdirSync(path.join(process.cwd(), "src", "components", name));
 
         fs.createFileSync(path.join(process.cwd(), "src", "components", name, `${name}.hbs`));
-
-        const components = fs.readJSONSync(path.join(process.cwd(), "src", "components", "components.json"));
-
-        components.components.push(name);
-
-        fs.writeJSONSync(path.join(process.cwd(), "src", "components", "components.json"), components);
     });
 
 program.addCommand(generateCommand);

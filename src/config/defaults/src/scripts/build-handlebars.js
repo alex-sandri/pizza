@@ -23,7 +23,7 @@ const getDirectories = (path) =>
         .filter(entry => entry.isDirectory())
         .map(entry => entry.name);
 
-const components = fs.readJSONSync(path.join(__dirname, "..", "components", "components.json")).components;
+const components = getDirectories(path.join(__dirname, "..", "components"));
 
 components.forEach(component =>
 {
