@@ -1,5 +1,5 @@
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs-extra");
 const handlebars = require("handlebars");
 const glob = require("glob");
 
@@ -22,6 +22,18 @@ const getDirectories = (path) =>
         .readdirSync(path, { withFileTypes: true })
         .filter(entry => entry.isDirectory())
         .map(entry => entry.name);
+
+const components = fs.readJSONSync().components;
+
+components.forEach(component =>
+{
+    handlebars.registerPartial(
+        component,
+        handlebars.compile(
+            fs.readFileSync(path.join(__dirname, "..", "components", component, `${component}.hbs`)).toString("utf-8"),
+        ),
+    );
+});
 
 const routes = getDirectories(path.join(__dirname, "..", "routes"));
 
