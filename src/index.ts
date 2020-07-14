@@ -123,7 +123,7 @@ program
             break;
         }
 
-        if (options.firebase) runCommand("firebase init");
+        if (options.firebase) runCommand("firebase init", projectDirPath);
     });
 
 program
