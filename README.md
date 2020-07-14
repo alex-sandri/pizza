@@ -61,3 +61,8 @@ Once the project is built the route will be accessible from `/<name>.html`.
 This will create a new folder inside `src/components` with a file named `<name>.hbs`.
 
 Include this component inside another `.hbs` file using this syntax: `{{> <name>}}`.
+
+## License
+
+This project is licensed under the terms of the MIT license.  
+See the [LICENSE](LICENSE) file for details.
