@@ -1,6 +1,12 @@
 # Pizza
 
-TODO
+A simple tool to create a web app using:
+ - TypeScript
+ - SCSS
+ - Handlebars
+ - webpack
+ - ESLint (TODO)
+ - Firebase (TODO)
 
 ## Installation
 
