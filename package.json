@@ -47,5 +47,8 @@
   "homepage": "https://github.com/alex-sandri/pizza#readme",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
+  },
+  "engines": {
+    "node": ">=10"
   }
 }
