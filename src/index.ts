@@ -40,14 +40,14 @@ const runCommand = (command: string, cwd?: string) =>
 
 const logError = (message: string) => console.log(chalk.red("Error:"), message);
 
-const getConfigOptions = (cwd?: string): ConfigOptions | undefined =>
+const getConfigOptions = (cwd?: string) =>
 {
     if (!fs.existsSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME)))
     {
         logError(`Cannot find '${CONFIG_FILE_NAME}' config file`);
         console.log("Try running 'pizza init <name>' first");
 
-        return;
+        process.exit(1);
     }
 
     return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME))
@@ -129,7 +129,7 @@ program
     
         runCommand("npm i", projectDirPath);
 
-        const configOptions = <ConfigOptions>getConfigOptions(projectDirPath);
+        const configOptions = getConfigOptions(projectDirPath);
     
         switch (configOptions.bundler.name)
         {
@@ -156,8 +156,6 @@ program
 
         const configOptions = getConfigOptions();
 
-        if (!configOptions) return;
-
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
         buildHandlebars();
@@ -171,8 +169,6 @@ program
         checkNodeVersion();
 
         const configOptions = getConfigOptions();
-
-        if (!configOptions) return;
 
         runCommand(`npm run serve:${configOptions.server.name}`);
     });
@@ -189,8 +185,6 @@ generateCommand.command("route <name>")
         checkNodeVersion();
 
         const configOptions = getConfigOptions();
-
-        if (!configOptions) return;
 
         if (!name.match(/^[a-z]+$/))
         {
@@ -227,8 +221,6 @@ generateCommand.command("component <name>")
         checkNodeVersion();
 
         const configOptions = getConfigOptions();
-
-        if (!configOptions) return;
 
         if (!name.match(/^[a-z]+$/))
         {
