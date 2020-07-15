@@ -18,7 +18,7 @@ A simple tool to create a web app using:
 
 ## Requirements
 
- - [Node.js](https://nodejs.org/)
+ - [Node.js](https://nodejs.org/) (10.0.0 or greater)
  - [npm](https://www.npmjs.com/) (normally comes with Node.js)
  - [firebase-tools](https://github.com/firebase/firebase-tools) (Required only if you use the `--firebase` flag when initializing the project)
 
