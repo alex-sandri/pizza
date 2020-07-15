@@ -161,6 +161,11 @@ program
 
             runCommand("firebase init", projectDirPath);
         }
+
+        fs.appendFileSync(path.join(projectDirPath, ".gitignore"), [
+            "node_modules/",
+            "public/",
+        ].join("\n"));
     });
 
 program
