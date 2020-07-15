@@ -56,7 +56,7 @@ const getConfigOptions = (cwd?: string) =>
 const setConfigOptions = (config: ConfigOptions, cwd?: string) =>
 {
     // Called to check that the config file exists
-    getConfigOptions();
+    getConfigOptions(cwd);
 
     fs.writeJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME), config);
 }
