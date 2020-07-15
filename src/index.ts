@@ -53,6 +53,14 @@ const getConfigOptions = (cwd?: string) =>
     return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME))
 };
 
+const setConfigOptions = (config: ConfigOptions, cwd?: string) =>
+{
+    // Called to check that the config file exists
+    getConfigOptions();
+
+    fs.writeJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME), config);
+}
+
 const checkNodeVersion = () =>
 {
     const version = pkg.engines.node;
@@ -144,7 +152,15 @@ program
             break;
         }
 
-        if (options.firebase) runCommand("firebase init", projectDirPath);
+        if (options.firebase)
+        {
+            setConfigOptions({
+                ...getConfigOptions(),
+                server: { name: "firebase" }
+            }, projectDirPath);
+
+            runCommand("firebase init", projectDirPath);
+        }
     });
 
 program
