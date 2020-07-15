@@ -15,7 +15,8 @@
   "author": "Alex Sandri",
   "license": "MIT",
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "defaults/**/*"
   ],
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",
