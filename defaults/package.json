@@ -5,7 +5,6 @@
   "scripts": {
     "start": "",
     "build:webpack": "webpack",
-    "build:handlebars": "node src/scripts/build-handlebars.js",
     "serve:webpack": "webpack-dev-server --open",
     "serve:firebase": "firebase serve --only hosting"
   },
