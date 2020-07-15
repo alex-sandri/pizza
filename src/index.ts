@@ -222,7 +222,7 @@ generateCommand.command("component <name>")
             return;
         }
 
-        fs.mkdirSync(componentPath);
+        fs.mkdirSync(componentPath, { recursive: true });
 
         fs.createFileSync(path.join(componentPath, `${name}.hbs`));
     });
