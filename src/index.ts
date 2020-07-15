@@ -141,7 +141,7 @@ program
 
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
-        runCommand(`npm run build:handlebars`);
+        runCommand(`node ./scripts/build-handlebars.js`);
     });
 
 program
