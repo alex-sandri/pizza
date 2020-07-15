@@ -29,15 +29,16 @@ const getDirectories = (path) =>
 
 const components = getDirectories(path.join(__dirname, "..", "components"));
 
-components?.forEach(component =>
-{
-    handlebars.registerPartial(
-        component,
-        handlebars.compile(
-            fs.readFileSync(path.join(__dirname, "..", "components", component, `${component}.hbs`)).toString("utf-8"),
-        ),
-    );
-});
+if (components)
+    components.forEach(component =>
+    {
+        handlebars.registerPartial(
+            component,
+            handlebars.compile(
+                fs.readFileSync(path.join(__dirname, "..", "components", component, `${component}.hbs`)).toString("utf-8"),
+            ),
+        );
+    });
 
 const routes = getDirectories(path.join(__dirname, "..", "routes"));
 
