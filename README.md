@@ -58,6 +58,8 @@ For this to work you need to install `firebase-tools` globally.
 
 `pizza serve`
 
+This will start a local server using `webpack-dev-server` (default) or, if you initialized the project with the `--firebase` option, using `firebase serve --only hosting`.
+
 ### Generate a new route
 
 `pizza generate route <name>`
