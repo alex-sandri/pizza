@@ -1,14 +1,9 @@
-html
-{
-    height: 100%;
-}
+@import "../../global/scss/main.scss";
 
 body
 {
     display: grid;
     place-items: center;
-    margin: 0;
-    height: 100%;
     background-color: red;
 
     h1
