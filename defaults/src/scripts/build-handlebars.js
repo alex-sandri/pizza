@@ -18,14 +18,18 @@ const sortByFileCreationTime = (a, b) =>
 }
 
 const getDirectories = (path) =>
-    fs
+{
+    if (!fs.existsSync(path)) return;
+
+    return fs
         .readdirSync(path, { withFileTypes: true })
         .filter(entry => entry.isDirectory())
         .map(entry => entry.name);
+};
 
 const components = getDirectories(path.join(__dirname, "..", "components"));
 
-components.forEach(component =>
+components?.forEach(component =>
 {
     handlebars.registerPartial(
         component,
