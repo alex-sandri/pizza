@@ -58,7 +58,7 @@ const setConfigOptions = (config: ConfigOptions, cwd?: string) =>
     // Called to check that the config file exists
     getConfigOptions(cwd);
 
-    fs.writeJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME), config);
+    fs.writeJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME), config, { spaces: 4 });
 }
 
 const checkNodeVersion = () =>
