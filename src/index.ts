@@ -9,6 +9,7 @@ const pkg = require("../package.json");
 import * as commander from "commander";
 import * as chalk from "chalk";
 import * as glob from "glob";
+import * as semver from "semver";
 
 const validateNpmPackageName = require("validate-npm-package-name");
 
@@ -52,6 +53,18 @@ const getConfigOptions = (cwd?: string): ConfigOptions | undefined =>
     return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME))
 };
 
+const checkNodeVersion = () =>
+{
+    const version = pkg.engines.node;
+
+    if (!semver.satisfies(process.version, version))
+    {
+        logError(`Required Node.js version '${version}' not satisfied with current version '${process.version}'.`);
+
+        process.exit(1);
+    }
+}
+
 const program = new commander.Command();
 
 program.version(pkg.version);
@@ -62,6 +75,8 @@ program
     .description("Create named project")
     .action((name, options) =>
     {
+        checkNodeVersion();
+
         const validationResult: {
             validForNewPackages: boolean,
             validForOldPackages: boolean,
@@ -137,6 +152,8 @@ program
     .description("Build the project")
     .action(() =>
     {
+        checkNodeVersion();
+
         const configOptions = getConfigOptions();
 
         if (!configOptions) return;
@@ -151,6 +168,8 @@ program
     .description("Create a local development server")
     .action(() =>
     {
+        checkNodeVersion();
+
         const configOptions = getConfigOptions();
 
         if (!configOptions) return;
@@ -167,6 +186,8 @@ generateCommand.command("route <name>")
     .description("Generate a new route")
     .action((name: string) =>
     {
+        checkNodeVersion();
+
         const configOptions = getConfigOptions();
 
         if (!configOptions) return;
@@ -203,6 +224,8 @@ generateCommand.command("component <name>")
     .description("Generate a new component")
     .action((name: string) =>
     {
+        checkNodeVersion();
+
         const configOptions = getConfigOptions();
 
         if (!configOptions) return;
