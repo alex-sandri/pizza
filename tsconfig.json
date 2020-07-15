@@ -8,6 +8,5 @@
         "strict": true,
         "resolveJsonModule": true
     },
-    "include": [ "src" ],
-    "exclude": [ "src/config/defaults" ]
+    "include": [ "src" ]
 }
