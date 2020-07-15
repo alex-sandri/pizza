@@ -12,6 +12,8 @@ import * as glob from "glob";
 
 const validateNpmPackageName = require("validate-npm-package-name");
 
+import { build as buildHandlebars } from "./scripts/build-handlebars";
+
 const CONFIG_FILE_NAME = "pizza.json";
 const DEFAULT_FILES_PATH = path.join(__dirname, "..", "defaults");
 
@@ -141,7 +143,7 @@ program
 
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
-        runCommand(`node ./scripts/build-handlebars.js`);
+        buildHandlebars();
     });
 
 program
