@@ -155,7 +155,7 @@ program
         if (options.firebase)
         {
             setConfigOptions({
-                ...getConfigOptions(),
+                ...getConfigOptions(projectDirPath),
                 server: { name: "firebase" }
             }, projectDirPath);
 
