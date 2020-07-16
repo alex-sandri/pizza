@@ -2,76 +2,24 @@
 
 import * as path from "path";
 import * as fs from "fs-extra";
-import * as childProcess from "child_process";
 
 const pkg = require("../package.json");
 
 import * as commander from "commander";
-import * as chalk from "chalk";
 import * as glob from "glob";
-import * as semver from "semver";
 
 const validateNpmPackageName = require("validate-npm-package-name");
 
+import {
+    runCommand,
+    logError,
+    getConfigOptions,
+    setConfigOptions,
+    checkNodeVersion,
+} from "./scripts/utilities";
 import { build as buildHandlebars } from "./scripts/build-handlebars";
 
-const CONFIG_FILE_NAME = "pizza.json";
 const DEFAULT_FILES_PATH = path.join(__dirname, "..", "defaults");
-
-export type ConfigOptions =
-{
-    bundler: {
-        name: "webpack",
-    },
-    linter: {
-        name: "eslint",
-    },
-    server: {
-        name: "webpack" | "firebase",
-    },
-}
-
-const runCommand = (command: string, cwd?: string) =>
-    childProcess.spawnSync(command, {
-        stdio: "inherit",
-        shell: true,
-        cwd: cwd ?? process.cwd(),
-    });
-
-const logError = (message: string) => console.log(chalk.red("Error:"), message);
-
-const getConfigOptions = (cwd?: string) =>
-{
-    if (!fs.existsSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME)))
-    {
-        logError(`Cannot find '${CONFIG_FILE_NAME}' config file`);
-        console.log("Try running 'pizza init <name>' first");
-
-        process.exit(1);
-    }
-
-    return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME));
-};
-
-const setConfigOptions = (config: ConfigOptions, cwd?: string) =>
-{
-    // Called to check that the config file exists
-    getConfigOptions(cwd);
-
-    fs.writeJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME), config, { spaces: 4 });
-}
-
-const checkNodeVersion = () =>
-{
-    const version = pkg.engines.node;
-
-    if (!semver.satisfies(process.version, version))
-    {
-        logError(`Required Node.js version '${version}' not satisfied with current version '${process.version}'.`);
-
-        process.exit(1);
-    }
-}
 
 const program = new commander.Command();
 
