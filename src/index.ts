@@ -143,8 +143,8 @@ program
         {
             case "webpack":
                 fs.copyFileSync(
-                    path.join(DEFAULT_FILES_PATH, "webpack.config.js"),
-                    path.join(projectDirPath, "webpack.config.js")
+                    path.join(DEFAULT_FILES_PATH, "webpack.config.ts"),
+                    path.join(projectDirPath, "webpack.config.ts")
                 );
             break;
             default:
