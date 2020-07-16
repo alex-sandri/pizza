@@ -10,7 +10,7 @@ A simple tool to create a web app using:
  - SCSS
  - Handlebars
  - webpack
- - ESLint (TODO)
+ - ESLint
  - Firebase (Optional)
 
 ## Table of Contents
