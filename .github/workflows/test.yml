@@ -23,3 +23,5 @@ jobs:
       - name: test
         run: |
           node lib/index.js init test
+          cd test
+          node ../lib/index.js make
