@@ -1,9 +1,9 @@
-"use strict";
+import path from "path";
+import glob from "glob";
+import webpack from "webpack";
+import "webpack-dev-server";
 
-const path = require("path");
-const glob = require("glob");
-
-exports.default = [
+const config: webpack.Configuration[] = [
     {
         entry: glob.sync("./src/routes/**/*.ts").reduce((entries, entry) =>
         {
@@ -71,3 +71,5 @@ exports.default = [
         },
     },
 ];
+
+export default config;
