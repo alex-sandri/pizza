@@ -123,7 +123,7 @@ program
             {
                 const fileName = path.basename(filePath);
 
-                const exclude = fileName === "webpack.config.js";
+                const exclude = fileName === "webpack.config.ts";
 
                 return !exclude;
             },
