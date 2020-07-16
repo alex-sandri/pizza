@@ -6,7 +6,8 @@
     "start": "",
     "build:webpack": "webpack",
     "serve:webpack": "webpack-dev-server --open",
-    "serve:firebase": "firebase serve --only hosting"
+    "serve:firebase": "firebase serve --only hosting",
+    "lint:eslint": "npx eslint src/ts/**/*.ts"
   },
   "license": "UNLICENSED",
   "private": true,
