@@ -177,6 +177,8 @@ program
 
         const configOptions = getConfigOptions();
 
+        runCommand(`npm run lint:${configOptions.linter.name}`);
+
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
         buildHandlebars();
