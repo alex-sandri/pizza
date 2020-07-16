@@ -167,6 +167,8 @@ program
             "public/",
             "webpack.config.js",
         ].join("\n"));
+
+        runCommand("pizza config apply", projectDirPath);
     });
 
 program
