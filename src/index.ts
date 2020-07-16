@@ -275,4 +275,21 @@ generateCommand.command("component <name>")
 
 program.addCommand(generateCommand);
 
+const configCommand = new commander
+    .Command("config")
+    .description("Configure the project");
+
+configCommand.command("apply")
+    .description("Build configuration files")
+    .action(() =>
+    {
+        checkNodeVersion();
+
+        getConfigOptions();
+
+        runCommand("tsc webpack.config.ts --esModuleInterop");
+    });
+
+program.addCommand(configCommand);
+
 program.parse(process.argv);
