@@ -50,7 +50,7 @@ const getConfigOptions = (cwd?: string) =>
         process.exit(1);
     }
 
-    return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME))
+    return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME));
 };
 
 const setConfigOptions = (config: ConfigOptions, cwd?: string) =>
