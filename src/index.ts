@@ -159,8 +159,7 @@ program
 const generateCommand = new commander
     .Command("generate")
     .alias("g")
-    .arguments("<type>")
-    .description("Generate files based on <type>");
+    .description("Generate files");
 
 generateCommand.command("route <name>")
     .alias("r")
