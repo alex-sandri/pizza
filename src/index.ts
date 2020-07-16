@@ -17,6 +17,9 @@ import {
     setConfigOptions,
     checkNodeVersion,
 } from "./scripts/utilities";
+
+import { configApply } from "./commands/config/apply";
+
 import { build as buildHandlebars } from "./scripts/build-handlebars";
 
 const DEFAULT_FILES_PATH = path.join(__dirname, "..", "defaults");
@@ -116,7 +119,7 @@ program
             "webpack.config.js",
         ].join("\n"));
 
-        runCommand("pizza config apply", projectDirPath);
+        configApply(projectDirPath);
     });
 
 program
@@ -235,14 +238,7 @@ const configCommand = new commander
 
 configCommand.command("apply")
     .description("Build configuration files")
-    .action(() =>
-    {
-        checkNodeVersion();
-
-        getConfigOptions();
-
-        runCommand("tsc webpack.config.ts --esModuleInterop");
-    });
+    .action(() => configApply());
 
 program.addCommand(configCommand);
 
