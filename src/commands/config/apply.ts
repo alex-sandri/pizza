@@ -10,5 +10,5 @@ export const configApply = (cwd?: string) =>
 
     getConfigOptions(cwd);
 
-    runCommand("tsc webpack.config.ts --esModuleInterop", cwd);
+    runCommand("npx tsc webpack.config.ts --esModuleInterop", cwd);
 }
