@@ -104,7 +104,7 @@ Include this component inside another `.hbs` file using this syntax: `{{> <name>
 `pizza config apply`
 
 You will need to run this command after modifying the following files:
- - webpack.config.ts
+ - `webpack.config.ts`
 
 ## License
 
