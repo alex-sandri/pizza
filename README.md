@@ -67,7 +67,10 @@ This will start a local server using `webpack-dev-server` (default) or, if you i
 
 ### Generate a new route
 
-`pizza generate route <name>`
+`pizza generate route <name>`  
+or  
+`pizza g r <name>`  
+for short
 
 This will create a new route folder inside `src/routes` with these files:
  - `<name>.hbs`
@@ -78,7 +81,10 @@ Once the project is built the route will be accessible from `/<name>.html`.
 
 ### Generate a new component
 
-`pizza generate component <name>`
+`pizza generate component <name>`  
+or  
+`pizza g c <name>`  
+for short
 
 This will create a new folder inside `src/components` with a file named `<name>.hbs`.
 
