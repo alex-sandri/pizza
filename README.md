@@ -13,6 +13,8 @@ A simple tool to create a web app using:
  - ESLint
  - Firebase (Optional)
 
+Pizza icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Flaticon](https://www.flaticon.com/)
+
 ## Table of Contents
 
  * [Requirements](#requirements)
