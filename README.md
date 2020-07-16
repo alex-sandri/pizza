@@ -13,7 +13,9 @@ A simple tool to create a web app using:
  - ESLint
  - Firebase (Optional)
 
-Pizza icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Flaticon](https://www.flaticon.com/)
+Pizza icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Flaticon](https://www.flaticon.com/).
+
+Assets inside `defaults/src/global/wwwroot/` that are used to make the PWA work were generated using [Real Favicon Generator](https://realfavicongenerator.net/).
 
 ## Table of Contents
 
@@ -32,7 +34,7 @@ Pizza icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Fla
 
 ## Installation
 
-Before installing, make sure to authenticate with GitHub Package Registry or using a `.npmrc` file. See "[Configuring npm for use with GitHub Package Registry](https://help.github.com/en/articles/configuring-npm-for-use-with-github-package-registry#authenticating-to-github-package-registry)."
+Before installing, make sure to authenticate with GitHub Package Registry or using a `.npmrc` file. See "[Configuring npm for use with GitHub Package Registry](https://help.github.com/en/articles/configuring-npm-for-use-with-github-package-registry#authenticating-to-github-package-registry)".
 
 ```
 npm config set @alex-sandri:registry https://npm.pkg.github.com/
