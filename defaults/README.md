@@ -9,7 +9,7 @@
         global/                         Use this folder to add global styles or scripts
             scss/                       Global styles
             ts/                         Global scripts
-            wwwroot/                    Other global files (This files (or folders) will be copied to the root of the 'public/' folder)
+            wwwroot/                    Other global files (These files (or folders) will be copied to the root of the 'public/' folder)
         routes/                         In this folder you'll find all the routes you created
             <route-name>/
                 <route-name>.hbs        The route's HTML template
