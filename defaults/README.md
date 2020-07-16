@@ -3,6 +3,8 @@
 ## Project structure
 
 ```
+    node_modules/                       Provides npm packages to the entire project
+    public/                             The folder containing the result of the 'make' command (aka the folder you can upload on a server)
     src/                                The folder you'll write code into
         global/                         Use this folder to add global styles or scripts
             scss/                       Global styles
