@@ -2,7 +2,9 @@ name: CI Tests
 
 on:
   - pull_request
-  - push
+  - push:
+    branches:
+      - *
 
 jobs:
   test:
