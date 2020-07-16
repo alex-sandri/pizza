@@ -207,10 +207,12 @@ program
 
 const generateCommand = new commander
     .Command("generate")
+    .alias("g")
     .arguments("<type>")
     .description("Generate files based on <type>");
 
 generateCommand.command("route <name>")
+    .alias("r")
     .description("Generate a new route")
     .action((name: string) =>
     {
@@ -247,6 +249,7 @@ generateCommand.command("route <name>")
     });
 
 generateCommand.command("component <name>")
+    .alias("c")
     .description("Generate a new component")
     .action((name: string) =>
     {
