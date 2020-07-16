@@ -180,6 +180,12 @@ program
         runCommand(`npm run build:${configOptions.bundler.name}`);
 
         buildHandlebars();
+
+        if (fs.existsSync(path.join(process.cwd(), "src", "global", "wwwroot")))
+            fs.copySync(
+                path.join(process.cwd(), "src", "global", "wwwroot"),
+                path.join(process.cwd(), "public"),
+            );
     });
 
 program
