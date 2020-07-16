@@ -84,6 +84,13 @@ This will create a new folder inside `src/components` with a file named `<name>.
 
 Include this component inside another `.hbs` file using this syntax: `{{> <name>}}`.
 
+### Build the config files
+
+`pizza config apply`
+
+You will need to run this command after modifying the following files:
+ - webpack.config.ts
+
 ## License
 
 This project is licensed under the terms of the MIT license.  
