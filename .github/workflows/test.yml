@@ -1,0 +1,25 @@
+name: CI Tests
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ windows-latest, ubuntu-latest, macos-latest ]
+        node: [ 10, 12, 14 ]
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node }}
+      - name: build
+        run: |
+          npm ci
+          npm run build
+      - name: test
+        run: |
+          node /lib/index.js init test
