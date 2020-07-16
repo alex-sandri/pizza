@@ -22,4 +22,4 @@ jobs:
           npm run build
       - name: test
         run: |
-          node /lib/index.js init test
+          node lib/index.js init test
