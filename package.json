@@ -16,7 +16,8 @@
   "license": "MIT",
   "files": [
     "lib/**/*",
-    "defaults/**/*"
+    "defaults/*",
+    "defaults/src/**/*"
   ],
   "devDependencies": {
     "@types/fs-extra": "^9.0.1",
