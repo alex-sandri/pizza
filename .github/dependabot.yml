@@ -8,3 +8,4 @@ updates:
     directory: "/defaults"
     schedule:
       interval: "daily"
+    versioning-strategy: widen
