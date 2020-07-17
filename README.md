@@ -48,7 +48,7 @@ npm install -g @alex-sandri/pizza
 
 You can configure the project modifying these files:
  - `pizza.json` The main configuration file
- - `.eslintrc.js` ESLint configuration
+ - `.eslintrc.json` ESLint configuration
  - `tsconfig.json` TypeScript compiler configuration
  - `webpack.config.ts` webpack configuration
 

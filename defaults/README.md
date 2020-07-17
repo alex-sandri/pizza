@@ -21,7 +21,7 @@
                 <component-name>.component.hbs      The component's HTML template
                 <component-name>.component.scss     The component's styles
                 <component-name>.component.ts       The component's code
-    .eslintrc.js                                    ESLint configuration
+    .eslintrc.json                                  ESLint configuration
     package.json                                    Configures npm package dependencies that are required for this project
     package-lock.json                               Provides version information for all packages installed into node_modules by the npm client
     pizza.json                                      Configures this project
