@@ -168,7 +168,7 @@ generateCommand.command("route <name>")
     {
         checkNodeVersion();
 
-        const configOptions = getConfigOptions();
+        getConfigOptions();
 
         if (!name.match(/^[a-z]+$/))
         {
@@ -205,7 +205,7 @@ generateCommand.command("component <name>")
     {
         checkNodeVersion();
 
-        const configOptions = getConfigOptions();
+        getConfigOptions();
 
         if (!name.match(/^[a-z]+$/))
         {
