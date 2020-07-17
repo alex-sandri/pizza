@@ -17,6 +17,9 @@ Pizza icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Fla
 
 Assets inside `defaults/src/global/wwwroot/` that are used to make the PWA work were generated using [Real Favicon Generator](https://realfavicongenerator.net/).
 
+**Note:**  
+PWA option coming soon
+
 ## Table of Contents
 
  * [Requirements](#requirements)
