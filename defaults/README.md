@@ -30,17 +30,45 @@
     webpack.config.js                               webpack configuration
 ```
 
-### Build data
+## Configure
+
+You can configure the project modifying these files:
+ - `pizza.json` The main configuration file
+ - `.eslintrc.json` ESLint configuration
+ - `webpack.config.ts` webpack configuration
+
+In the `pizza.json` file you can configure things like the bundler, the linter, the server and in a future release the hosting provider.
+
+**Note:**  
+Currently the `pizza.json` file options, except for the local server one, have only one option to choose from.
+
+### TypeScript
+
+If you want to customiza the TypeScript configuration **DON'T** edit the `tsconfig.json` file but instead edit it in the `pizza.json` file like this:
+
+```javascript
+// pizza.json
+
+{
+    "override": {
+        "typescript": {
+            // Your custom TypeScript configuration
+        }
+    }
+}
+```
+
+## Build data
 
 You can pass an object to the template compiler to add dynamic data in a page
 
-#### Usage
+### Usage
 
 1. Create a file called `build-data.js` inside a route folder (e.g.: `src/routes/index/build-data.js`)
 2. Export an object with your data: `module.exports = { ... };`
 3. Access your data within a template using: `{{ data.<property-name> }}`
 
-#### Example:
+### Example:
 
 ```javascript
 // build-data.js
