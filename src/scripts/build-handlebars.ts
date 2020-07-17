@@ -55,14 +55,40 @@ export const build = () =>
 
     routes?.forEach(route =>
     {
-        assets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.*.css`)).sort(sortByFileCreationTime)[0]));
-        assets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.*.js`)).sort(sortByFileCreationTime)[0]));
+        const routeTemplatePath = path.join(PROJECT_PATH, "src", "routes", route, `${route}.hbs`);
+
+        const usedPartials = getPartialsUsedIn(routeTemplatePath);
+
+        const finalAssets = {
+            css: assets.css.filter(asset => usedPartials.includes(asset.split(".")[0])),
+            js: assets.js.filter(asset => usedPartials.includes(asset.split(".")[0])),
+        };
+        
+        finalAssets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.*.css`)).sort(sortByFileCreationTime)[0]));
+        finalAssets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.*.js`)).sort(sortByFileCreationTime)[0]));
 
         fs.writeFileSync(
             path.join(PUBLIC_PATH, `${route}.html`),
-            handlebars.compile(
-                fs.readFileSync(path.join(PROJECT_PATH, "src", "routes", route, `${route}.hbs`), "utf8")
-            )({ assets }),
+            handlebars.compile(fs.readFileSync(routeTemplatePath, "utf8"))({ assets: finalAssets }),
         );
     });
+}
+
+const getPartialsUsedIn = (partialPath: string): string[] =>
+{
+    const usedPartials: string[] = [];
+
+    handlebars.parseWithoutProcessing(fs.readFileSync(partialPath, "utf8")).body.forEach(statement =>
+    {
+        if (statement.type === "PartialStatement")
+        {
+            const partialName = (<any>statement).name.parts[0];
+
+            usedPartials.push(partialName);
+
+            usedPartials.push(...getPartialsUsedIn(path.join(process.cwd(), "src", "components", partialName, `${partialName}.hbs`)));
+        }
+    });
+
+    return usedPartials;
 }
