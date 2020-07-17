@@ -55,7 +55,8 @@ export const build = () =>
 
     routes?.forEach(route =>
     {
-        const routeTemplatePath = path.join(PROJECT_PATH, "src", "routes", route, `${route}.route.hbs`);
+        const routePath = path.join(PROJECT_PATH, "src", "routes", route);
+        const routeTemplatePath = path.join(routePath, `${route}.route.hbs`);
 
         const usedPartials = getPartialsUsedIn(routeTemplatePath);
 
@@ -90,9 +91,17 @@ export const build = () =>
             }),
         };
 
+        let data;
+
+        if (fs.existsSync(path.join(routePath, "build-data.js")))
+            data = require(path.join(routePath, "build-data.js"));
+
         fs.writeFileSync(
             path.join(PUBLIC_PATH, `${route}.html`),
-            handlebars.compile(fs.readFileSync(routeTemplatePath, "utf8"))({ assets: finalAssets }),
+            handlebars.compile(fs.readFileSync(routeTemplatePath, "utf8"))({
+                assets: finalAssets,
+                data,
+            }),
         );
     });
 }
