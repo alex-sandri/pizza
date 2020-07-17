@@ -44,6 +44,10 @@ npm config set @alex-sandri:registry https://npm.pkg.github.com/
 npm install -g @alex-sandri/pizza
 ```
 
+## Configure
+
+See [README](defaults/README.md)
+
 ## Usage
 
 ### Create a new project
