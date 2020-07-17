@@ -207,10 +207,10 @@ generateCommand.command("component <name>")
 
         getConfigOptions();
 
-        if (!name.match(/^[a-z]+$/))
+        if (!name.match(/^[A-Za-z]+$/))
         {
             logError("Invalid value for 'name' argument");
-            console.log("'name' can only include lowercase letters");
+            console.log("'name' can only include uppercase or lowercase letters");
 
             return;
         }
