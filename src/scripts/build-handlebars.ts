@@ -55,7 +55,7 @@ export const build = () =>
 
     routes?.forEach(route =>
     {
-        const routeTemplatePath = path.join(PROJECT_PATH, "src", "routes", route, `${route}.hbs`);
+        const routeTemplatePath = path.join(PROJECT_PATH, "src", "routes", route, `${route}.route.hbs`);
 
         const usedPartials = getPartialsUsedIn(routeTemplatePath);
 
@@ -64,8 +64,8 @@ export const build = () =>
             js: componentAssets.js.filter(asset => usedPartials.includes(asset.split(".")[0])),
         };
         
-        finalAssets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.*.css`)).sort(sortByFileCreationTime)[0]));
-        finalAssets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.*.js`)).sort(sortByFileCreationTime)[0]));
+        finalAssets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.route.*.css`)).sort(sortByFileCreationTime)[0]));
+        finalAssets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.route.*.js`)).sort(sortByFileCreationTime)[0]));
 
         fs.writeFileSync(
             path.join(PUBLIC_PATH, `${route}.html`),

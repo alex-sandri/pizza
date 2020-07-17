@@ -191,7 +191,7 @@ generateCommand.command("route <name>")
 
         glob.sync(path.join(routePath, "*")).forEach(filePath =>
         {
-            // Replace default file name with the new route name: index.ts -> <name>.ts
+            // Replace default file name with the new route name: index.route.ts -> <name>.route.ts
             const newFileName = path.basename(filePath).replace("index", name);
 
             fs.renameSync(filePath, path.join(path.dirname(filePath), newFileName));
