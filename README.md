@@ -46,7 +46,7 @@ npm install -g @alex-sandri/pizza
 
 ## Configure
 
-See [README](defaults/README.md)
+See [README](defaults/README.md#configure)
 
 ## Usage
 
