@@ -89,9 +89,9 @@ or
 for short
 
 This will create a new route folder inside `src/routes` with these files:
- - `<name>.hbs`
- - `<name>.scss`
- - `<name>.ts`
+ - `<name>.route.hbs`
+ - `<name>.route.scss`
+ - `<name>.route.ts`
 
 Once the project is built the route will be accessible from `/<name>.html`.
 
@@ -102,7 +102,10 @@ or
 `pizza g c <name>`  
 for short
 
-This will create a new folder inside `src/components` with a file named `<name>.hbs`.
+This will create a new folder inside `src/components` with a these files:
+ - `<name>.component.hbs`
+ - `<name>.component.scss`
+ - `<name>.component.ts`
 
 Include this component inside another `.hbs` file using this syntax: `{{> <name>}}`.
 
