@@ -31,6 +31,11 @@ export const build = () =>
             .map(entry => entry.name);
     };
 
+    const assets = {
+        css: <string[]>[],
+        js: <string[]>[],
+    };
+
     const components = getDirectories(path.join(PROJECT_PATH, "src", "components"));
 
     components?.forEach(component =>
@@ -41,24 +46,23 @@ export const build = () =>
                 fs.readFileSync(path.join(PROJECT_PATH, "src", "components", component, `${component}.hbs`)).toString("utf-8"),
             ),
         );
+
+        assets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${component}.*.css`)).sort(sortByFileCreationTime)[0]));
+        assets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${component}.*.js`)).sort(sortByFileCreationTime)[0]));
     });
 
     const routes = getDirectories(path.join(PROJECT_PATH, "src", "routes"));
 
     routes?.forEach(route =>
     {
-        const data = {
-            assets: {
-                js: path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.*.js`)).sort(sortByFileCreationTime)[0]),
-                css: path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.*.css`)).sort(sortByFileCreationTime)[0]),
-            },
-        };
+        assets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.*.css`)).sort(sortByFileCreationTime)[0]));
+        assets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.*.js`)).sort(sortByFileCreationTime)[0]));
 
         fs.writeFileSync(
             path.join(PUBLIC_PATH, `${route}.html`),
             handlebars.compile(
                 fs.readFileSync(path.join(PROJECT_PATH, "src", "routes", route, `${route}.hbs`), "utf8")
-            )(data),
+            )({ assets }),
         );
     });
 }

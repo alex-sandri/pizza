@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     {{> defaultHeadTags}}
-    <link rel="stylesheet" href="/assets/css/{{assets.css}}">
+    {{#each assets.css}}
+    <link rel="stylesheet" href="/assets/css/{{this}}">
+    {{/each}}
     <title>Pizza App</title>
 </head>
 <body>
     <img src="/assets/img/pizza.svg" alt="Pizza">
-    <script src="/assets/js/{{assets.js}}"></script>
+    {{#each assets.js}}
+    <script src="/assets/js/{{this}}"></script>
+    {{/each}}
 </body>
 </html>

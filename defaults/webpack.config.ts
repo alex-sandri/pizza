@@ -5,7 +5,7 @@ import "webpack-dev-server";
 
 const config: webpack.Configuration[] = [
     {
-        entry: glob.sync("./src/routes/**/*.ts").reduce((entries, entry) =>
+        entry: glob.sync("./src/@(components|routes)/**/*.ts").reduce((entries, entry) =>
         {
             const entryName = path.basename(entry).split(".")[0];
 
@@ -33,7 +33,7 @@ const config: webpack.Configuration[] = [
         },
     },
     {
-        entry: glob.sync("./src/routes/**/*.scss").reduce((entries, entry) =>
+        entry: glob.sync("./src/@(components|routes)/**/*.scss").reduce((entries, entry) =>
         {
             const entryName = path.basename(entry).split(".")[0];
 
