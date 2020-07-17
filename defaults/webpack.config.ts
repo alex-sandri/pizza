@@ -7,7 +7,7 @@ const config: webpack.Configuration[] = [
     {
         entry: glob.sync("./src/@(components|routes)/**/*.ts").reduce((entries, entry) =>
         {
-            const entryName = path.basename(entry).split(".")[0];
+            const entryName = `${path.basename(entry).split(".")[0]}.${path.basename(entry).split(".")[1]}`;
 
             entries[entryName] = entry;
 
@@ -35,7 +35,7 @@ const config: webpack.Configuration[] = [
     {
         entry: glob.sync("./src/@(components|routes)/**/*.scss").reduce((entries, entry) =>
         {
-            const entryName = path.basename(entry).split(".")[0];
+            const entryName = `${path.basename(entry).split(".")[0]}.${path.basename(entry).split(".")[1]}`;
 
             entries[entryName] = entry;
 

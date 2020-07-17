@@ -86,7 +86,7 @@ const getPartialsUsedIn = (partialPath: string): string[] =>
 
             usedPartials.push(partialName);
 
-            usedPartials.push(...getPartialsUsedIn(path.join(process.cwd(), "src", "components", partialName, `${partialName}.hbs`)));
+            usedPartials.push(...getPartialsUsedIn(path.join(process.cwd(), "src", "components", partialName, `${partialName}.component.hbs`)));
         }
     });
 
