@@ -31,7 +31,7 @@ export const build = () =>
             .map(entry => entry.name);
     };
 
-    const assets = {
+    const componentAssets = {
         css: <string[]>[],
         js: <string[]>[],
     };
@@ -43,12 +43,12 @@ export const build = () =>
         handlebars.registerPartial(
             component,
             handlebars.compile(
-                fs.readFileSync(path.join(PROJECT_PATH, "src", "components", component, `${component}.hbs`)).toString("utf-8"),
+                fs.readFileSync(path.join(PROJECT_PATH, "src", "components", component, `${component}.component.hbs`)).toString("utf-8"),
             ),
         );
 
-        assets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${component}.*.css`)).sort(sortByFileCreationTime)[0]));
-        assets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${component}.*.js`)).sort(sortByFileCreationTime)[0]));
+        componentAssets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${component}.component.*.css`)).sort(sortByFileCreationTime)[0]));
+        componentAssets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${component}.component.*.js`)).sort(sortByFileCreationTime)[0]));
     });
 
     const routes = getDirectories(path.join(PROJECT_PATH, "src", "routes"));
@@ -60,8 +60,8 @@ export const build = () =>
         const usedPartials = getPartialsUsedIn(routeTemplatePath);
 
         const finalAssets = {
-            css: assets.css.filter(asset => usedPartials.includes(asset.split(".")[0])),
-            js: assets.js.filter(asset => usedPartials.includes(asset.split(".")[0])),
+            css: componentAssets.css.filter(asset => usedPartials.includes(asset.split(".")[0])),
+            js: componentAssets.js.filter(asset => usedPartials.includes(asset.split(".")[0])),
         };
         
         finalAssets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.*.css`)).sort(sortByFileCreationTime)[0]));

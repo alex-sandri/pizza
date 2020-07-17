@@ -226,9 +226,9 @@ generateCommand.command("component <name>")
 
         fs.mkdirSync(componentPath, { recursive: true });
 
-        fs.createFileSync(path.join(componentPath, `${name}.hbs`));
-        fs.createFileSync(path.join(componentPath, `${name}.scss`));
-        fs.createFileSync(path.join(componentPath, `${name}.ts`));
+        fs.createFileSync(path.join(componentPath, `${name}.component.hbs`));
+        fs.createFileSync(path.join(componentPath, `${name}.component.scss`));
+        fs.createFileSync(path.join(componentPath, `${name}.component.ts`));
     });
 
 program.addCommand(generateCommand);
