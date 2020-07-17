@@ -26,4 +26,14 @@ export const configApply = (cwd?: string) =>
 
         fs.writeJSONSync(tsConfigPath, tsConfig);
     }
+
+    if (configOptions.override?.eslint)
+    {
+        const eslintConfigPath = path.join(cwd ?? process.cwd(), ".eslintrc.json");
+        const eslintConfig = fs.readJSONSync(eslintConfigPath);
+
+        _.merge(eslintConfig, configOptions.override.eslint);
+
+        fs.writeJSONSync(eslintConfigPath, eslintConfig);
+    }
 }
