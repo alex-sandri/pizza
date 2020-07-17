@@ -14,6 +14,15 @@ module.exports = {
   plugins: [
     '@typescript-eslint',
   ],
+  settings: {
+    "import/resolver": "webpack",
+  },
   rules: {
+    "import/extensions": [
+      "error",
+      {
+        ts: "never",
+      },
+    ],
   },
 };
