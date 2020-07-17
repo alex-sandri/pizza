@@ -61,7 +61,7 @@ Currently the `pizza.json` file options, except for the local server one, have o
 
 ### Create a new project
 
-```
+```bash
 pizza init <name> [--firebase]
 cd <name>
 ```
@@ -73,19 +73,27 @@ For this to work you need to install `firebase-tools` globally.
 
 ### Build the project
 
-`pizza make`
+```bash
+pizza make
+```
 
 ### Start a local server
 
-`pizza serve`
+```bash
+pizza serve
+```
 
 This will start a local server using `webpack-dev-server` (default) or, if you initialized the project with the `--firebase` option, using `firebase serve --only hosting`.
 
 ### Generate a new route
 
-`pizza generate route <name>`  
-or  
-`pizza g r <name>`  
+```bash
+pizza generate route <name>
+```
+or
+```bash
+pizza g r <name>
+```
 for short
 
 This will create a new route folder inside `src/routes` with these files:
@@ -97,9 +105,13 @@ Once the project is built the route will be accessible from `/<name>.html`.
 
 ### Generate a new component
 
-`pizza generate component <name>`  
-or  
-`pizza g c <name>`  
+```bash
+pizza generate component <name>
+```
+or
+```bash
+pizza g c <name>
+```
 for short
 
 This will create a new folder inside `src/components` with a these files:
@@ -111,7 +123,9 @@ Include this component inside another `.hbs` file using this syntax: `{{> <name>
 
 ### Build the config files
 
-`pizza config apply`
+```bash
+pizza config apply
+```
 
 You will need to run this command after modifying the following files:
  - `webpack.config.ts`
