@@ -60,12 +60,35 @@ export const build = () =>
         const usedPartials = getPartialsUsedIn(routeTemplatePath);
 
         const finalAssets = {
-            css: componentAssets.css.filter(asset => usedPartials.includes(asset.split(".")[0])),
-            js: componentAssets.js.filter(asset => usedPartials.includes(asset.split(".")[0])),
+            css: [
+                ...componentAssets
+                    .css
+                    .filter(asset => usedPartials.includes(asset.split(".")[0])),
+                path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.route.*.css`)).sort(sortByFileCreationTime)[0]),
+            ].filter(asset =>
+            {
+                const assetName = asset.split(".")[0];
+                const assetType = asset.split(".")[1];
+
+                const assetPath = path.join(PROJECT_PATH, "src", `${assetType}s`, assetName, `${assetName}.${assetType}.scss`);
+
+                return fs.statSync(assetPath).size > 0;
+            }),
+            js: [
+                ...componentAssets
+                    .js
+                    .filter(asset => usedPartials.includes(asset.split(".")[0])),
+                path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.route.*.js`)).sort(sortByFileCreationTime)[0]),
+            ].filter(asset =>
+            {
+                const assetName = asset.split(".")[0];
+                const assetType = asset.split(".")[1];
+
+                const assetPath = path.join(PROJECT_PATH, "src", `${assetType}s`, assetName, `${assetName}.${assetType}.ts`);
+
+                return fs.statSync(assetPath).size > 0;
+            }),
         };
-        
-        finalAssets.css.push(path.basename(glob.sync(path.join(ASSETS_PATH, "css", `${route}.route.*.css`)).sort(sortByFileCreationTime)[0]));
-        finalAssets.js.push(path.basename(glob.sync(path.join(ASSETS_PATH, "js", `${route}.route.*.js`)).sort(sortByFileCreationTime)[0]));
 
         fs.writeFileSync(
             path.join(PUBLIC_PATH, `${route}.html`),
