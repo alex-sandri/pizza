@@ -3,7 +3,7 @@ import * as fs from "fs-extra";
 import * as handlebars from "handlebars";
 import * as glob from "glob";
 
-export const build = (production?: boolean) =>
+export const build = (production: boolean) =>
 {
     const PROJECT_PATH = process.cwd();
 
