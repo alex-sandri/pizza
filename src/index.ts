@@ -22,7 +22,7 @@ import { configApply } from "./commands/config/apply";
 
 import { build as buildHandlebars } from "./scripts/build-handlebars";
 
-const DEFAULT_FILES_PATH = path.join(__dirname, "..", "defaults");
+const TEMPLATE_PATH = path.join(__dirname, "..", "template");
 
 const program = new commander.Command();
 
@@ -61,7 +61,7 @@ program
 
         fs.mkdirSync(projectDirPath);
 
-        fs.copySync(DEFAULT_FILES_PATH, projectDirPath, {
+        fs.copySync(TEMPLATE_PATH, projectDirPath, {
             filter: filePath =>
             {
                 const fileName = path.basename(filePath);
@@ -72,7 +72,7 @@ program
             },
         });
 
-        const defaultNpmPackage = fs.readJSONSync(path.join(DEFAULT_FILES_PATH, "package.json"));
+        const defaultNpmPackage = fs.readJSONSync(path.join(TEMPLATE_PATH, "package.json"));
 
         defaultNpmPackage.name = name;
 
@@ -86,7 +86,7 @@ program
         {
             case "webpack":
                 fs.copyFileSync(
-                    path.join(DEFAULT_FILES_PATH, "webpack.config.ts"),
+                    path.join(TEMPLATE_PATH, "webpack.config.ts"),
                     path.join(projectDirPath, "webpack.config.ts")
                 );
             break;
@@ -181,7 +181,7 @@ generateCommand.command("route <name>")
             return;
         }
 
-        fs.copySync(path.join(DEFAULT_FILES_PATH, "src", "routes", "index"), routePath);
+        fs.copySync(path.join(TEMPLATE_PATH, "src", "routes", "index"), routePath);
 
         glob.sync(path.join(routePath, "*")).forEach(filePath =>
         {
