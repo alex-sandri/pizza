@@ -83,10 +83,10 @@ program
 					path.join(TEMPLATE_PATH, "webpack.config.ts"),
 					path.join(projectDirPath, "webpack.config.ts")
 				);
-			break;
+				break;
 			default:
 				logError(`Unsupported bundler: '${configOptions.bundler.name}'`);
-			break;
+				break;
 		}
 
 		if (options.firebase)
