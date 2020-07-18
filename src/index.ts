@@ -11,11 +11,11 @@ import * as glob from "glob";
 const validateNpmPackageName = require("validate-npm-package-name");
 
 import {
-    runCommand,
-    logError,
-    getConfigOptions,
-    setConfigOptions,
-    checkNodeVersion,
+	runCommand,
+	logError,
+	getConfigOptions,
+	setConfigOptions,
+	checkNodeVersion,
 } from "./scripts/utilities";
 
 import { configApply } from "./commands/config/apply";
@@ -27,213 +27,213 @@ const TEMPLATE_PATH = path.join(__dirname, "..", "template");
 const program = new commander.Command();
 
 program.version(pkg.version);
-    
+	
 program
-    .command("init <name>")
-    .option("--firebase", "Configure project with Firebase")
-    .description("Create named project")
-    .action((name, options) =>
-    {
-        checkNodeVersion();
+	.command("init <name>")
+	.option("--firebase", "Configure project with Firebase")
+	.description("Create named project")
+	.action((name, options) =>
+	{
+		checkNodeVersion();
 
-        const validationResult: {
-            validForNewPackages: boolean,
-            validForOldPackages: boolean,
-            errors?: string[],
-            warnings?: string[],
-        } = validateNpmPackageName(name);
+		const validationResult: {
+			validForNewPackages: boolean,
+			validForOldPackages: boolean,
+			errors?: string[],
+			warnings?: string[],
+		} = validateNpmPackageName(name);
 
-        if (!validationResult.validForNewPackages)
-        {
-            (<string[]>(validationResult.errors ?? validationResult.warnings)).forEach(logError);
+		if (!validationResult.validForNewPackages)
+		{
+			(<string[]>(validationResult.errors ?? validationResult.warnings)).forEach(logError);
 
-            return;
-        }
+			return;
+		}
 
-        const projectDirPath = path.join(process.cwd(), name);
+		const projectDirPath = path.join(process.cwd(), name);
 
-        if (fs.existsSync(projectDirPath))
-        {
-            logError(`A folder named '${name}' already exists`);
+		if (fs.existsSync(projectDirPath))
+		{
+			logError(`A folder named '${name}' already exists`);
 
-            return;
-        }
+			return;
+		}
 
-        fs.mkdirSync(projectDirPath);
+		fs.mkdirSync(projectDirPath);
 
-        fs.copySync(TEMPLATE_PATH, projectDirPath, {
-            filter: filePath =>
-            {
-                const fileName = path.basename(filePath);
+		fs.copySync(TEMPLATE_PATH, projectDirPath, {
+			filter: filePath =>
+			{
+				const fileName = path.basename(filePath);
 
-                const exclude = fileName === "webpack.config.ts";
+				const exclude = fileName === "webpack.config.ts";
 
-                return !exclude;
-            },
-        });
+				return !exclude;
+			},
+		});
 
-        const defaultNpmPackage = fs.readJSONSync(path.join(TEMPLATE_PATH, "package.json"));
+		const defaultNpmPackage = fs.readJSONSync(path.join(TEMPLATE_PATH, "package.json"));
 
-        defaultNpmPackage.name = name;
+		defaultNpmPackage.name = name;
 
-        fs.writeJSONSync(path.join(projectDirPath, "package.json"), defaultNpmPackage);
-    
-        runCommand("npm i", projectDirPath);
+		fs.writeJSONSync(path.join(projectDirPath, "package.json"), defaultNpmPackage);
+	
+		runCommand("npm i", projectDirPath);
 
-        const configOptions = getConfigOptions(projectDirPath);
-    
-        switch (configOptions.bundler.name)
-        {
-            case "webpack":
-                fs.copyFileSync(
-                    path.join(TEMPLATE_PATH, "webpack.config.ts"),
-                    path.join(projectDirPath, "webpack.config.ts")
-                );
-            break;
-            default:
-                logError(`Unsupported bundler: '${configOptions.bundler.name}'`);
-            break;
-        }
+		const configOptions = getConfigOptions(projectDirPath);
+	
+		switch (configOptions.bundler.name)
+		{
+			case "webpack":
+				fs.copyFileSync(
+					path.join(TEMPLATE_PATH, "webpack.config.ts"),
+					path.join(projectDirPath, "webpack.config.ts")
+				);
+			break;
+			default:
+				logError(`Unsupported bundler: '${configOptions.bundler.name}'`);
+			break;
+		}
 
-        if (options.firebase)
-        {
-            setConfigOptions({
-                ...getConfigOptions(projectDirPath),
-                server: { name: "firebase" }
-            }, projectDirPath);
+		if (options.firebase)
+		{
+			setConfigOptions({
+				...getConfigOptions(projectDirPath),
+				server: { name: "firebase" }
+			}, projectDirPath);
 
-            runCommand("firebase init", projectDirPath);
-        }
+			runCommand("firebase init", projectDirPath);
+		}
 
-        fs.appendFileSync(path.join(projectDirPath, ".gitignore"), [
-            "node_modules/",
-            "public/",
-            "dist/",
-            "webpack.config.js",
-        ].join("\n"));
+		fs.appendFileSync(path.join(projectDirPath, ".gitignore"), [
+			"node_modules/",
+			"public/",
+			"dist/",
+			"webpack.config.js",
+		].join("\n"));
 
-        configApply(projectDirPath);
-    });
-
-program
-    .command("make")
-    .option("--prod", "Build for production")
-    .description("Build the project")
-    .action(options =>
-    {
-        checkNodeVersion();
-
-        const configOptions = getConfigOptions();
-
-        runCommand(`npm run lint:${configOptions.linter.name}`);
-
-        runCommand(`npm run build:${configOptions.bundler.name}${options.prod ? ":prod" : ""}`);
-
-        buildHandlebars(options.prod);
-
-        if (fs.existsSync(path.join(process.cwd(), "src", "global", "wwwroot")))
-            fs.copySync(
-                path.join(process.cwd(), "src", "global", "wwwroot"),
-                path.join(process.cwd(), options.prod ? "dist" : "public"),
-            );
-    });
+		configApply(projectDirPath);
+	});
 
 program
-    .command("serve")
-    .description("Create a local development server")
-    .action(() =>
-    {
-        checkNodeVersion();
+	.command("make")
+	.option("--prod", "Build for production")
+	.description("Build the project")
+	.action(options =>
+	{
+		checkNodeVersion();
 
-        const configOptions = getConfigOptions();
+		const configOptions = getConfigOptions();
 
-        runCommand(`npm run serve:${configOptions.server.name}`);
-    });
+		runCommand(`npm run lint:${configOptions.linter.name}`);
+
+		runCommand(`npm run build:${configOptions.bundler.name}${options.prod ? ":prod" : ""}`);
+
+		buildHandlebars(options.prod);
+
+		if (fs.existsSync(path.join(process.cwd(), "src", "global", "wwwroot")))
+			fs.copySync(
+				path.join(process.cwd(), "src", "global", "wwwroot"),
+				path.join(process.cwd(), options.prod ? "dist" : "public"),
+			);
+	});
+
+program
+	.command("serve")
+	.description("Create a local development server")
+	.action(() =>
+	{
+		checkNodeVersion();
+
+		const configOptions = getConfigOptions();
+
+		runCommand(`npm run serve:${configOptions.server.name}`);
+	});
 
 const generateCommand = new commander
-    .Command("generate")
-    .alias("g")
-    .description("Generate files");
+	.Command("generate")
+	.alias("g")
+	.description("Generate files");
 
 generateCommand.command("route <name>")
-    .alias("r")
-    .description("Generate a new route")
-    .action((name: string) =>
-    {
-        checkNodeVersion();
+	.alias("r")
+	.description("Generate a new route")
+	.action((name: string) =>
+	{
+		checkNodeVersion();
 
-        getConfigOptions();
+		getConfigOptions();
 
-        if (!name.match(/^[a-z]+$/))
-        {
-            logError("Invalid value for 'name' argument");
-            console.log("'name' can only include lowercase letters");
+		if (!name.match(/^[a-z]+$/))
+		{
+			logError("Invalid value for 'name' argument");
+			console.log("'name' can only include lowercase letters");
 
-            return;
-        }
+			return;
+		}
 
-        const routePath = path.join(process.cwd(), "src", "routes", name);
+		const routePath = path.join(process.cwd(), "src", "routes", name);
 
-        if (fs.existsSync(routePath))
-        {
-            logError(`A route named '${name}' already exists`);
+		if (fs.existsSync(routePath))
+		{
+			logError(`A route named '${name}' already exists`);
 
-            return;
-        }
+			return;
+		}
 
-        fs.copySync(path.join(TEMPLATE_PATH, "src", "routes", "index"), routePath);
+		fs.copySync(path.join(TEMPLATE_PATH, "src", "routes", "index"), routePath);
 
-        glob.sync(path.join(routePath, "*")).forEach(filePath =>
-        {
-            // Replace default file name with the new route name: index.route.ts -> <name>.route.ts
-            const newFileName = path.basename(filePath).replace("index", name);
+		glob.sync(path.join(routePath, "*")).forEach(filePath =>
+		{
+			// Replace default file name with the new route name: index.route.ts -> <name>.route.ts
+			const newFileName = path.basename(filePath).replace("index", name);
 
-            fs.renameSync(filePath, path.join(path.dirname(filePath), newFileName));
-        });
-    });
+			fs.renameSync(filePath, path.join(path.dirname(filePath), newFileName));
+		});
+	});
 
 generateCommand.command("component <name>")
-    .alias("c")
-    .description("Generate a new component")
-    .action((name: string) =>
-    {
-        checkNodeVersion();
+	.alias("c")
+	.description("Generate a new component")
+	.action((name: string) =>
+	{
+		checkNodeVersion();
 
-        getConfigOptions();
+		getConfigOptions();
 
-        if (!name.match(/^[A-Za-z]+$/))
-        {
-            logError("Invalid value for 'name' argument");
-            console.log("'name' can only include uppercase or lowercase letters");
+		if (!name.match(/^[A-Za-z]+$/))
+		{
+			logError("Invalid value for 'name' argument");
+			console.log("'name' can only include uppercase or lowercase letters");
 
-            return;
-        }
+			return;
+		}
 
-        const componentPath = path.join(process.cwd(), "src", "components", name);
+		const componentPath = path.join(process.cwd(), "src", "components", name);
 
-        if (fs.existsSync(componentPath))
-        {
-            logError(`A component named '${name}' already exists`);
+		if (fs.existsSync(componentPath))
+		{
+			logError(`A component named '${name}' already exists`);
 
-            return;
-        }
+			return;
+		}
 
-        fs.mkdirSync(componentPath, { recursive: true });
+		fs.mkdirSync(componentPath, { recursive: true });
 
-        fs.createFileSync(path.join(componentPath, `${name}.component.hbs`));
-        fs.createFileSync(path.join(componentPath, `${name}.component.scss`));
-        fs.createFileSync(path.join(componentPath, `${name}.component.ts`));
-    });
+		fs.createFileSync(path.join(componentPath, `${name}.component.hbs`));
+		fs.createFileSync(path.join(componentPath, `${name}.component.scss`));
+		fs.createFileSync(path.join(componentPath, `${name}.component.ts`));
+	});
 
 program.addCommand(generateCommand);
 
 const configCommand = new commander
-    .Command("config")
-    .description("Configure the project");
+	.Command("config")
+	.description("Configure the project");
 
 configCommand.command("apply")
-    .description("Build configuration files")
-    .action(() => configApply());
+	.description("Build configuration files")
+	.action(() => configApply());
 
 program.addCommand(configCommand);
 

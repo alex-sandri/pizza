@@ -1,14 +1,14 @@
 import {
-    checkNodeVersion,
-    getConfigOptions,
-    runCommand
+	checkNodeVersion,
+	getConfigOptions,
+	runCommand
 } from "../../scripts/utilities";
 
 export const configApply = (cwd?: string) =>
 {
-    checkNodeVersion();
+	checkNodeVersion();
 
-    getConfigOptions(cwd);
+	getConfigOptions(cwd);
 
-    runCommand("npx tsc webpack.config.ts --esModuleInterop", cwd);
+	runCommand("npx tsc webpack.config.ts --esModuleInterop", cwd);
 }
