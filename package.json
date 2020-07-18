@@ -11,7 +11,7 @@
     "build": "tsc --build src",
     "preversion": "npm run lint",
     "postversion": "git push origin master --follow-tags && npm publish",
-    "lint": "npx eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts"
   },
   "keywords": [],
   "author": "Alex Sandri",
