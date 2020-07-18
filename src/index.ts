@@ -116,6 +116,7 @@ program
         fs.appendFileSync(path.join(projectDirPath, ".gitignore"), [
             "node_modules/",
             "public/",
+            "dist/",
             "webpack.config.js",
         ].join("\n"));
 
