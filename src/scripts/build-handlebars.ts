@@ -1,7 +1,7 @@
-import * as path from "path";
-import * as fs from "fs-extra";
-import * as handlebars from "handlebars";
-import * as glob from "glob";
+import path from "path";
+import fs from "fs-extra";
+import handlebars from "handlebars";
+import glob from "glob";
 
 export const build = (production: boolean) =>
 {

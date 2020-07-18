@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-import * as path from "path";
-import * as fs from "fs-extra";
+import path from "path";
+import fs from "fs-extra";
 
 import pkg from "../package.json";
 
-import * as commander from "commander";
-import * as glob from "glob";
+import commander from "commander";
+import glob from "glob";
 
 const validateNpmPackageName = require("validate-npm-package-name");
 
