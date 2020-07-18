@@ -2,7 +2,7 @@ import path from "path";
 import fs from "fs-extra";
 import childProcess from "child_process";
 
-const pkg = require("../../package.json");
+import pkg from "../../package.json";
 
 import chalk from "chalk";
 import semver from "semver";
