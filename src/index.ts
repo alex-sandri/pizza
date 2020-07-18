@@ -7,8 +7,7 @@ import pkg from "../package.json";
 
 import commander from "commander";
 import glob from "glob";
-
-const validateNpmPackageName = require("validate-npm-package-name");
+import validateNpmPackageName from "validate-npm-package-name";
 
 import {
 	runCommand,
@@ -36,12 +35,7 @@ program
 	{
 		checkNodeVersion();
 
-		const validationResult: {
-			validForNewPackages: boolean,
-			validForOldPackages: boolean,
-			errors?: string[],
-			warnings?: string[],
-		} = validateNpmPackageName(name);
+		const validationResult = validateNpmPackageName(name);
 
 		if (!validationResult.validForNewPackages)
 		{
