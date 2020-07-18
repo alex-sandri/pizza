@@ -22,16 +22,18 @@ export type ConfigOptions =
 	},
 }
 
-export const runCommand = (command: string, cwd?: string) =>
+export const runCommand = (command: string, cwd?: string): void =>
+{
 	childProcess.spawnSync(command, {
 		stdio: "inherit",
 		shell: true,
 		cwd: cwd ?? process.cwd(),
 	});
+};
 
-export const logError = (message: string) => console.log(chalk.red("Error:"), message);
+export const logError = (message: string): void => console.log(chalk.red("Error:"), message);
 
-export const getConfigOptions = (cwd?: string) =>
+export const getConfigOptions = (cwd?: string): ConfigOptions =>
 {
 	if (!fs.existsSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME)))
 	{
@@ -41,18 +43,18 @@ export const getConfigOptions = (cwd?: string) =>
 		process.exit(1);
 	}
 
-	return <ConfigOptions>fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME));
+	return fs.readJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME));
 };
 
-export const setConfigOptions = (config: ConfigOptions, cwd?: string) =>
+export const setConfigOptions = (config: ConfigOptions, cwd?: string): void =>
 {
 	// Called to check that the config file exists
 	getConfigOptions(cwd);
 
 	fs.writeJSONSync(path.join(cwd ?? process.cwd(), CONFIG_FILE_NAME), config, { spaces: 4 });
-}
+};
 
-export const checkNodeVersion = () =>
+export const checkNodeVersion = (): void =>
 {
 	const version = pkg.engines.node;
 
@@ -62,4 +64,4 @@ export const checkNodeVersion = () =>
 
 		process.exit(1);
 	}
-}
+};
