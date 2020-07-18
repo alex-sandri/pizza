@@ -41,7 +41,7 @@ You can configure the project modifying these files:
 
 In the `pizza.json` file you can configure things like the bundler, the linter, the server and in a future release the hosting provider.
 
-**Note:**  
+**Note:**\
 Currently the `pizza.json` file options, except for the local server one, have only one option to choose from.
 
 ## Build data
