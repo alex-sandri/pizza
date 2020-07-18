@@ -125,8 +125,9 @@ program
 
 program
     .command("make")
+    .option("--prod", "Build for production")
     .description("Build the project")
-    .action(() =>
+    .action(options =>
     {
         checkNodeVersion();
 
@@ -134,7 +135,7 @@ program
 
         runCommand(`npm run lint:${configOptions.linter.name}`);
 
-        runCommand(`npm run build:${configOptions.bundler.name}`);
+        runCommand(`npm run build:${configOptions.bundler.name}${options.prod ? ":prod" : ""}`);
 
         buildHandlebars();
 
