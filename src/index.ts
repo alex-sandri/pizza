@@ -61,14 +61,6 @@ program
 
         fs.mkdirSync(projectDirPath);
 
-        [
-            path.join(projectDirPath, "public", "assets", "css"),
-            path.join(projectDirPath, "public", "assets", "js"),
-        ].forEach(dir =>
-        {
-            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-        });
-
         fs.copySync(DEFAULT_FILES_PATH, projectDirPath, {
             filter: filePath =>
             {
