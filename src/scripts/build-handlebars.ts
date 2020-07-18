@@ -3,12 +3,12 @@ import * as fs from "fs-extra";
 import * as handlebars from "handlebars";
 import * as glob from "glob";
 
-export const build = () =>
+export const build = (production?: boolean) =>
 {
     const PROJECT_PATH = process.cwd();
 
-    const PUBLIC_PATH = path.join(PROJECT_PATH, "public");
-    const ASSETS_PATH = path.join(PUBLIC_PATH, "assets");
+    const OUTPUT_PATH = path.join(PROJECT_PATH, production ? "dist" : "public");
+    const ASSETS_PATH = path.join(OUTPUT_PATH, "assets");
 
     /**
      * The first file is the newest
@@ -97,7 +97,7 @@ export const build = () =>
             data = require(path.join(routePath, "build-data.js"));
 
         fs.writeFileSync(
-            path.join(PUBLIC_PATH, `${route}.html`),
+            path.join(OUTPUT_PATH, `${route}.html`),
             handlebars.compile(fs.readFileSync(routeTemplatePath, "utf8"))({
                 assets: finalAssets,
                 data,

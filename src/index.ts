@@ -137,12 +137,12 @@ program
 
         runCommand(`npm run build:${configOptions.bundler.name}${options.prod ? ":prod" : ""}`);
 
-        buildHandlebars();
+        buildHandlebars(options.prod);
 
         if (fs.existsSync(path.join(process.cwd(), "src", "global", "wwwroot")))
             fs.copySync(
                 path.join(process.cwd(), "src", "global", "wwwroot"),
-                path.join(process.cwd(), "public"),
+                path.join(process.cwd(), options.prod ? "dist" : "public"),
             );
     });
 
