@@ -3,8 +3,9 @@
 ## Project structure
 
 ```
+    dist/                                           The folder containing the result of the 'make --prod' command (aka the folder you can upload on a server)
     node_modules/                                   Provides npm packages to the entire project
-    public/                                         The folder containing the result of the 'make' command (aka the folder you can upload on a server)
+    public/                                         The folder containing the result of the 'make' command (development build)
     src/                                            The folder you'll write code into
         global/                                     Use this folder to add global styles or scripts
             scss/                                   Global styles
