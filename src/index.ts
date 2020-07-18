@@ -26,7 +26,7 @@ const TEMPLATE_PATH = path.join(__dirname, "..", "template");
 const program = new commander.Command();
 
 program.version(pkg.version);
-	
+
 program
 	.command("init <name>")
 	.option("--firebase", "Configure project with Firebase")
@@ -71,11 +71,11 @@ program
 		defaultNpmPackage.name = name;
 
 		fs.writeJSONSync(path.join(projectDirPath, "package.json"), defaultNpmPackage);
-	
+
 		runCommand("npm i", projectDirPath);
 
 		const configOptions = getConfigOptions(projectDirPath);
-	
+
 		switch (configOptions.bundler.name)
 		{
 			case "webpack":
