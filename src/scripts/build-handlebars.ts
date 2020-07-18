@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import handlebars from "handlebars";
 import glob from "glob";
 
-export const build = (production: boolean) =>
+export const build = (production: boolean): void =>
 {
 	const PROJECT_PATH = process.cwd();
 
@@ -19,7 +19,7 @@ export const build = (production: boolean) =>
 		const bStats = fs.statSync(b);
 
 		return bStats.ctime.getTime() - aStats.ctime.getTime();
-	}
+	};
 
 	const getDirectories = (path: string) =>
 	{
@@ -104,7 +104,7 @@ export const build = (production: boolean) =>
 			}),
 		);
 	});
-}
+};
 
 const getPartialsUsedIn = (partialPath: string): string[] =>
 {
@@ -114,7 +114,7 @@ const getPartialsUsedIn = (partialPath: string): string[] =>
 	{
 		if (statement.type === "PartialStatement")
 		{
-			const partialName = (<any>statement).name.parts[0];
+			const partialName = (<{ name: { parts: string[] } }><unknown>statement).name.parts[0];
 
 			usedPartials.push(partialName);
 
@@ -123,4 +123,4 @@ const getPartialsUsedIn = (partialPath: string): string[] =>
 	});
 
 	return usedPartials;
-}
+};
