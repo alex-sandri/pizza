@@ -22,6 +22,7 @@ const config: webpack.Configuration[] = [
                 },
             ],
         },
+        devtool: "inline-source-map",
         resolve: {
             extensions: [ ".ts", ".js" ],
         },
@@ -63,9 +64,15 @@ const config: webpack.Configuration[] = [
                         },
                         {
                             loader: "css-loader",
+                            options: {
+                                sourceMap: true,
+                            },
                         },
                         {
                             loader: "sass-loader",
+                            options: {
+                                sourceMap: true,
+                            },
                         },
                     ],
                 },
