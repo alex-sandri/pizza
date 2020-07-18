@@ -3,7 +3,7 @@
 import * as path from "path";
 import * as fs from "fs-extra";
 
-const pkg = require("../package.json");
+import pkg from "../package.json";
 
 import * as commander from "commander";
 import * as glob from "glob";
