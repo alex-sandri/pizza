@@ -65,8 +65,12 @@ For this to work you need to install `firebase-tools` globally.
 ### Build the project
 
 ```bash
-pizza make
+pizza make [--prod]
 ```
+
+This will build the project and put the output files inside:
+ - `dist/` if the `--prod` option is set
+ - `public/` otherwise
 
 ### Start a local server
 
