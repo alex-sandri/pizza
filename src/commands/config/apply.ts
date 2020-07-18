@@ -1,8 +1,3 @@
-import * as fs from "fs-extra";
-import path from "path";
-
-import * as _ from "lodash";
-
 import {
     checkNodeVersion,
     getConfigOptions,
@@ -13,27 +8,7 @@ export const configApply = (cwd?: string) =>
 {
     checkNodeVersion();
 
-    const configOptions = getConfigOptions(cwd);
+    getConfigOptions(cwd);
 
     runCommand("npx tsc webpack.config.ts --esModuleInterop", cwd);
-
-    if (configOptions.override?.typescript)
-    {
-        const tsConfigPath = path.join(cwd ?? process.cwd(), "tsconfig.json");
-        const tsConfig = fs.readJSONSync(tsConfigPath);
-
-        _.merge(tsConfig, configOptions.override.typescript);
-
-        fs.writeJSONSync(tsConfigPath, tsConfig);
-    }
-
-    if (configOptions.override?.eslint)
-    {
-        const eslintConfigPath = path.join(cwd ?? process.cwd(), ".eslintrc.json");
-        const eslintConfig = fs.readJSONSync(eslintConfigPath);
-
-        _.merge(eslintConfig, configOptions.override.eslint);
-
-        fs.writeJSONSync(eslintConfigPath, eslintConfig);
-    }
 }

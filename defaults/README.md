@@ -34,44 +34,14 @@
 
 You can configure the project modifying these files:
  - `pizza.json` The main configuration file
+ - `.eslintrc.json` ESLint configuration
+ - `tsconfig.json` TypeScript configuration
  - `webpack.config.ts` webpack configuration
 
 In the `pizza.json` file you can configure things like the bundler, the linter, the server and in a future release the hosting provider.
 
 **Note:**  
 Currently the `pizza.json` file options, except for the local server one, have only one option to choose from.
-
-### TypeScript
-
-If you want to customiza the TypeScript configuration **DON'T** edit the `tsconfig.json` file but instead edit it in the `pizza.json` file like this:
-
-```javascript
-// pizza.json
-
-{
-    "override": {
-        "typescript": {
-            // Your custom TypeScript configuration
-        }
-    }
-}
-```
-
-### ESLint
-
-If you want to customiza the ESLint configuration **DON'T** edit the `.eslintrc.json` file but instead edit it in the `pizza.json` file like this:
-
-```javascript
-// pizza.json
-
-{
-    "override": {
-        "eslint": {
-            // Your custom ESLint configuration
-        }
-    }
-}
-```
 
 ## Build data
 

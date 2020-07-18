@@ -20,14 +20,6 @@ export type ConfigOptions =
     server: {
         name: "webpack" | "firebase",
     },
-    override?: {
-        typescript?: {
-            [key: string]: string,
-        },
-        eslint?: {
-            [key: string]: string,
-        },
-    },
 }
 
 export const runCommand = (command: string, cwd?: string) =>
