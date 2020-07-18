@@ -1,11 +1,11 @@
-import * as path from "path";
-import * as fs from "fs-extra";
-import * as childProcess from "child_process";
+import path from "path";
+import fs from "fs-extra";
+import childProcess from "child_process";
 
 const pkg = require("../../package.json");
 
-import * as chalk from "chalk";
-import * as semver from "semver";
+import chalk from "chalk";
+import semver from "semver";
 
 const CONFIG_FILE_NAME = "pizza.json";
 
