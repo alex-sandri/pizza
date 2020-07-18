@@ -27,7 +27,7 @@
     pizza.json                                      Configures this project
     README.md                                       The file you're reading
     tsconfig.json                                   TypeScript configuration
-    webpack.config.js                               webpack configuration
+    webpack.config.ts                               webpack configuration
 ```
 
 ## Configure
