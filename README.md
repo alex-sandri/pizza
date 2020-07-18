@@ -1,8 +1,8 @@
 # Pizza
 
-![CI Tests](https://github.com/alex-sandri/pizza/workflows/CI%20Tests/badge.svg)  
-[![GitHub license](https://img.shields.io/github/license/alex-sandri/pizza)](https://github.com/alex-sandri/pizza/blob/master/LICENSE)  
-![GitHub package.json version](https://img.shields.io/github/package-json/v/alex-sandri/pizza)  
+![CI Tests](https://github.com/alex-sandri/pizza/workflows/CI%20Tests/badge.svg)\
+[![GitHub license](https://img.shields.io/github/license/alex-sandri/pizza)](https://github.com/alex-sandri/pizza/blob/master/LICENSE)\
+![GitHub package.json version](https://img.shields.io/github/package-json/v/alex-sandri/pizza)\
 ![Node Version](https://img.shields.io/badge/node-%3E%3D%2010.0.0-brightgreen)
 
 A simple tool to create a web app using:
@@ -17,7 +17,7 @@ Pizza icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Fla
 
 Assets inside `template/src/global/wwwroot/` that are used to make the PWA work were generated using [Real Favicon Generator](https://realfavicongenerator.net/).
 
-**Note:**  
+**Note:**\
 PWA option coming soon
 
 ## Table of Contents
@@ -59,7 +59,7 @@ cd <name>
 
 This will create a folder named `<name>` and the basic files to get you started immediately.
 
-Adding the `--firebase` option will, after the initial configuration process, run the `firebase init` command to configure Firebase with this project.  
+Adding the `--firebase` option will, after the initial configuration process, run the `firebase init` command to configure Firebase with this project.\
 For this to work you need to install `firebase-tools` globally.
 
 ### Build the project
@@ -127,5 +127,5 @@ You will need to run this command after modifying the following files:
 
 ## License
 
-This project is licensed under the terms of the MIT license.  
+This project is licensed under the terms of the MIT license.\
 See the [LICENSE](LICENSE) file for details.
