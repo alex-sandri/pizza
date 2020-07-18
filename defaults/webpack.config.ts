@@ -3,12 +3,15 @@ import glob from "glob";
 import webpack from "webpack";
 import "webpack-dev-server";
 
-export default (env, argv) =>
+export default (env: any, argv: any) =>
 {
     const isProduction = argv.mode === "production";
 
-    return <webpack.Configuration[]>[
-        {
+    const configs = <{
+        ts: webpack.Configuration,
+        scss: webpack.Configuration,
+    }>{
+        ts: {
             entry: glob.sync("./src/@(components|routes)/**/*.ts").reduce((entries, entry) =>
             {
                 const entryName = `${path.basename(entry).split(".")[0]}.${path.basename(entry).split(".")[1]}`;
@@ -25,22 +28,15 @@ export default (env, argv) =>
                     },
                 ],
             },
-            devtool: isProduction ? null : "inline-source-map",
             resolve: {
                 extensions: [ ".ts", ".js" ],
             },
-            devServer: isProduction
-                ? null
-                :
-                    {
-                        contentBase: "./public",
-                    },
             output: {
                 filename: "[name].[contenthash].js",
                 path: path.resolve(__dirname, `${isProduction ? "dist" : "public"}/assets/js`),
             },
         },
-        {
+        scss: {
             entry: glob.sync("./src/@(components|routes)/**/*.scss").reduce((entries, entry) =>
             {
                 const entryName = `${path.basename(entry).split(".")[0]}.${path.basename(entry).split(".")[1]}`;
@@ -84,5 +80,16 @@ export default (env, argv) =>
                 ],
             },
         },
-    ];
+    };
+
+    if (isProduction)
+    {
+        configs.ts.devtool = "inline-source-map";
+
+        configs.ts.devServer = {
+            contentBase: "./public",
+        };
+    }
+
+    return Object.values(configs);
 };
