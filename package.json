@@ -4,7 +4,7 @@
   "description": "A simple tool to start building a web app as quickly as possible",
   "main": "lib/index.js",
   "bin": {
-    "pizza": "lib/index.js"
+    "pizza": "bin/pizza"
   },
   "scripts": {
     "start": "nodemon -e ts --watch src/ --exec npm run build",
@@ -17,6 +17,7 @@
   "author": "Alex Sandri",
   "license": "MIT",
   "files": [
+    "bin/*",
     "lib/**/*",
     "template/**/*",
     "!template/node_modules/**/*"
