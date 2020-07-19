@@ -39,3 +39,8 @@ jobs:
           node lib/index.js init test
           cd test
           node ../lib/index.js make
+          node ../lib/index.js make --prod
+          node ../lib/index.js g c test
+          node ../lib/index.js g r test
+          node ../lib/index.js make
+          node ../lib/index.js make --prod
