@@ -16,8 +16,7 @@ import {
 } from "./scripts/utilities";
 
 import { configApply } from "./commands/config/apply";
-
-import { build as buildHandlebars } from "./scripts/build-handlebars";
+import { build as buildHandlebars } from "./commands/make";
 
 const TEMPLATE_PATH = path.join(__dirname, "..", "template");
 
