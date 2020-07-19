@@ -8,7 +8,7 @@
     "build:webpack:prod": "webpack --mode production",
     "serve:webpack": "webpack-dev-server --open",
     "serve:firebase": "firebase serve --only hosting",
-    "lint:eslint": "eslint src/**/*.ts"
+    "lint:eslint": "eslint src/**/*.ts --resolve-plugins-relative-to ."
   },
   "license": "UNLICENSED",
   "private": true,
