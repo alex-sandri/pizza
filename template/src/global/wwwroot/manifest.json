@@ -1,0 +1,10 @@
+{
+    "name": "Pizza App",
+    "short_name": "Pizza App",
+    "theme_color": "#ff0000",
+    "background_color": "#ff0000",
+    "display": "standalone",
+    "start_url": "/?utm_source=homescreen",
+    "scope": "/",
+    "icons": []
+}
