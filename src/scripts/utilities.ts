@@ -20,6 +20,14 @@ export type ConfigOptions =
 	server: {
 		name: "webpack" | "firebase",
 	},
+	options?: {
+		serviceWorker?: {
+			assets?: {
+				static?: string[],
+				patterns?: string[],
+			},
+		},
+	},
 }
 
 export const runCommand = (command: string, cwd?: string): void =>
