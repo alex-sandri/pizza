@@ -1,21 +1,19 @@
-const VERSION: string = "SW_VERSION";
-const ASSETS: string[] = [ "SW_ASSETS" ];
+const VERSION  = "SW_VERSION";
+const ASSETS = [ "SW_ASSETS" ];
 
-const cacheName : string = `static-v${VERSION}`;
+const cacheName = `static-v${VERSION}`;
 
-self.addEventListener("install", (e : any) =>
+self.addEventListener("install", (e: any) =>
 	e.waitUntil(caches.open(cacheName).then(cache => cache.addAll(ASSETS))));
 
-self.addEventListener("activate", (e : any) =>
+self.addEventListener("activate", (e: any) =>
 	e.waitUntil(caches.keys().then(cacheNames =>
 		Promise.all(cacheNames
 			.filter(cache => cache !== cacheName)
 			.map(cache => caches.delete(cache))))));
 
-self.addEventListener("fetch", (e : any) =>
+self.addEventListener("fetch", (e: any) =>
 {
-	const url = new URL(e.request.url);
-
 	const respondWith = (path: string) =>
 	{
 		e.respondWith(caches.open(cacheName).then(cache => cache.match(path)
