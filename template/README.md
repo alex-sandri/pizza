@@ -44,6 +44,63 @@ In the `pizza.json` file you can configure things like the bundler, the linter, 
 **Note:**\
 Currently the `pizza.json` file options, except for the local server one, have only one option to choose from.
 
+### PWA
+
+#### Install `@alex-sandri/pizza`
+
+```bash
+npm i @alex-sandri/pizza
+```
+
+#### Register the Service Worker
+Add the following code at the top of every `<route-name>.route.ts` file.
+
+```typescript
+import * as pizza from "@alex-sandri/pizza";
+
+pizza.ServiceWorker.register();
+```
+
+#### Show install button
+
+```typescript
+let deferredPrompt?: any;
+
+const installPwaButton = <HTMLButtonElement>document.querySelector("#install-pwa");
+
+pizza.ServiceWorker.listen("beforeinstallprompt", e =>
+{
+    deferredPrompt = e;
+
+    installPwaButton.style.display = "block";
+});
+
+installPwaButton.addEventListener("click", () =>
+{
+	deferredPrompt?.prompt();
+
+	deferredPrompt?.userChoice.then((choiceResult: any) =>
+	{
+        if (choiceResult.outcome === "accepted")
+            installPwaButton.style.display = "none";
+
+		deferredPrompt = null;
+	});
+});
+```
+
+#### Listen for app updates
+
+```typescript
+pizza.ServiceWorker.listen("updateready", () =>
+{
+    // TODO: Show a message to the user
+
+    // After the user accepts the update
+    pizza.ServiceWorker.update();
+});
+```
+
 ## Build data
 
 You can pass an object to the template compiler to add dynamic data in a page

@@ -16,8 +16,7 @@ A simple tool to create a web app using:
 
 Pizza icon made by [Freepik](https://www.flaticon.com/authors/freepik) from [Flaticon](https://www.flaticon.com/).
 
-**Note:**\
-PWA option coming soon
+Assets inside `template/src/global/wwwroot/` that are used to make the PWA work were generated using [Real Favicon Generator](https://realfavicongenerator.net/).
 
 ## Table of Contents
 

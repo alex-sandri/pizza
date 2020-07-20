@@ -7,5 +7,12 @@
     },
     "server": {
         "name": "webpack"
+    },
+    "options": {
+        "serviceWorker": {
+            "assets": [
+                "/offline.html"
+            ]
+        }
     }
 }

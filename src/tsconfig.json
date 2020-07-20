@@ -6,7 +6,8 @@
         "rootDir": ".",
         "strict": true,
         "resolveJsonModule": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "declaration": true
     },
     "references": [
         {

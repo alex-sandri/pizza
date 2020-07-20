@@ -82,7 +82,7 @@ export default (env: any, argv: any) =>
         },
     };
 
-    if (isProduction)
+    if (!isProduction)
     {
         configs.ts.devtool = "inline-source-map";
 

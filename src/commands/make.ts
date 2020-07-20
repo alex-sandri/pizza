@@ -2,6 +2,9 @@ import path from "path";
 import fs from "fs-extra";
 import handlebars from "handlebars";
 import glob from "glob";
+import crypto from "crypto";
+import { getConfigOptions } from "../scripts/utilities";
+import * as _ from "lodash";
 
 export const build = (production: boolean): void =>
 {
@@ -104,6 +107,21 @@ export const build = (production: boolean): void =>
 			}),
 		);
 	});
+
+	const swAssets = getConfigOptions().options?.serviceWorker?.assets;
+
+	const assetsArray = _.flatten([
+		swAssets?.static,
+		_.flatten(swAssets?.patterns?.map(pattern => glob.sync(path.join(PROJECT_PATH, pattern)))),
+	]);
+
+	const swFile = fs
+		.readFileSync(path.join(__dirname, "..", "sw", "sw.js"))
+		.toString("utf8")
+		.replace("SW_VERSION", crypto.createHash("sha1").update(assetsArray.join("")).digest("hex"))
+		.replace("\"SW_ASSETS\"", assetsArray.join("\",\""));
+
+	fs.writeFileSync(path.join(OUTPUT_PATH, "sw.js"), swFile);
 };
 
 const getPartialsUsedIn = (partialPath: string): string[] =>
