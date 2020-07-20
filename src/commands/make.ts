@@ -117,7 +117,13 @@ export const build = (production: boolean): void =>
 
 	const swVersion = crypto
 		.createHash("sha1")
-		.update(assetsArray.reduce((accumulator, asset) => accumulator += fs.readFileSync(asset).toString("utf8"), ""))
+		.update(assetsArray.reduce(
+			(accumulator, asset) =>
+				accumulator += fs
+					.readFileSync(path.join(PROJECT_PATH, OUTPUT_PATH, asset))
+					.toString("utf8"),
+			""
+		))
 		.digest("hex");
 
 	const swFile = fs
