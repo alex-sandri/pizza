@@ -112,7 +112,7 @@ export const build = (production: boolean): void =>
 
 	const assetsArray = _.flatten([
 		(swAssets?.static ?? []),
-		_.flatten(swAssets?.patterns?.map(pattern => glob.sync(path.join(PROJECT_PATH, pattern)))),
+		_.flatten(swAssets?.patterns?.map(pattern => glob.sync(path.join(PROJECT_PATH, "src", pattern)))),
 	]);
 
 	const swVersion = crypto
