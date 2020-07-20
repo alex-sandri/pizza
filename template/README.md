@@ -46,12 +46,6 @@ Currently the `pizza.json` file options, except for the local server one, have o
 
 ### PWA
 
-#### Install `@alex-sandri/pizza`
-
-```bash
-npm i @alex-sandri/pizza
-```
-
 #### Register the Service Worker
 Add the following code at the top of every `<route-name>.route.ts` file.
 
