@@ -111,14 +111,24 @@ export const build = (production: boolean): void =>
 	const swAssets = getConfigOptions().options?.serviceWorker?.assets;
 
 	const assetsArray = _.flatten([
-		swAssets?.static,
+		(swAssets?.static ?? []),
 		_.flatten(swAssets?.patterns?.map(pattern => glob.sync(path.join(PROJECT_PATH, pattern)))),
 	]);
+
+	const swVersion = crypto
+		.createHash("sha1")
+		.update(assetsArray
+			.reduce(asset =>
+				fs
+					.readFileSync(asset)
+					.toString("utf8")
+			))
+		.digest("hex");
 
 	const swFile = fs
 		.readFileSync(path.join(__dirname, "..", "sw", "sw.js"))
 		.toString("utf8")
-		.replace("SW_VERSION", crypto.createHash("sha1").update(assetsArray.join("")).digest("hex"))
+		.replace("SW_VERSION", swVersion)
 		.replace("\"SW_ASSETS\"", assetsArray.join("\",\""));
 
 	fs.writeFileSync(path.join(OUTPUT_PATH, "sw.js"), swFile);
