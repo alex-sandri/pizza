@@ -4,6 +4,7 @@ import handlebars from "handlebars";
 import glob from "glob";
 import crypto from "crypto";
 import { getConfigOptions } from "../scripts/utilities";
+import * as _ from "lodash";
 
 export const build = (production: boolean): void =>
 {
@@ -109,12 +110,10 @@ export const build = (production: boolean): void =>
 
 	const swAssets = getConfigOptions().options?.serviceWorker?.assets;
 
-	const assetsArray = [
-		...(swAssets?.static ?? []),
-		...(swAssets?.patterns ?? [])
-			.map(pattern => glob.sync(path.join(PROJECT_PATH, pattern)))
-			.flat(),
-	];
+	const assetsArray = _.flatten([
+		swAssets?.static,
+		_.flatten(swAssets?.patterns?.map(pattern => glob.sync(path.join(PROJECT_PATH, pattern)))),
+	]);
 
 	const swFile = fs
 		.readFileSync(path.join(__dirname, "..", "sw", "sw.js"))

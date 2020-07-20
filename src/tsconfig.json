@@ -7,11 +7,7 @@
         "strict": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "declaration": true,
-        "lib": [
-            "ES2019",
-            "DOM"
-        ]
+        "declaration": true
     },
     "references": [
         {
