@@ -1,3 +1,3 @@
-import * as pizza from "@alex-sandri/pizza/lib/exports";
+// import * as pizza from "@alex-sandri/pizza/lib/exports";
 
-pizza.ServiceWorker.register();
+// pizza.ServiceWorker.register();
