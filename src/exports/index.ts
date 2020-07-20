@@ -1,91 +1,88 @@
-export namespace pizza
+export type ServiceWorkerEvent = "updateready" | "beforeinstallprompt";
+
+export type ServiceWorkerEventData = {
+	event?: Event,
+}
+
+export class ServiceWorker
 {
-	export type ServiceWorkerEvent = "updateready" | "beforeinstallprompt";
+	private static sw: globalThis.ServiceWorker;
 
-	export type ServiceWorkerEventData = {
-		event?: Event,
-	}
+	private static listeners: {
+		event: ServiceWorkerEvent,
+		callback: (data?: ServiceWorkerEventData) => void,
+	}[];
 
-	export class ServiceWorker
+	public static register = (): void =>
 	{
-		private static sw: globalThis.ServiceWorker;
+		if (!navigator.serviceWorker) return;
 
-		private static listeners: {
-			event: pizza.ServiceWorkerEvent,
-			callback: (data?: pizza.ServiceWorkerEventData) => void,
-		}[];
-
-		public static register = (): void =>
+		window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").then(reg =>
 		{
-			if (!navigator.serviceWorker) return;
+			if (!navigator.serviceWorker.controller) return;
 
-			window.addEventListener("load", () => navigator.serviceWorker.register("/sw.js").then(reg =>
+			if (reg.waiting)
 			{
-				if (!navigator.serviceWorker.controller) return;
+				ServiceWorker.sw = reg.waiting;
 
-				if (reg.waiting)
-				{
-					pizza.ServiceWorker.sw = reg.waiting;
+				ServiceWorker.dispatchEvent("updateready");
 
-					pizza.ServiceWorker.dispatchEvent("updateready");
+				return;
+			}
 
-					return;
-				}
-
-				if (reg.installing)
-				{
-					pizza.ServiceWorker.trackInstalling(reg.installing);
-
-					return;
-				}
-
-				reg.addEventListener("updatefound", () => pizza.ServiceWorker.trackInstalling(<globalThis.ServiceWorker>reg.installing));
-			}));
-
-			// Ensure refresh is only called once.
-			// This works around a bug in "force update on reload".
-			let refreshing: boolean;
-
-			navigator.serviceWorker.addEventListener("controllerchange", () =>
+			if (reg.installing)
 			{
-				if (refreshing) return;
+				ServiceWorker.trackInstalling(reg.installing);
 
-				location.reload();
+				return;
+			}
 
-				refreshing = true;
-			});
+			reg.addEventListener("updatefound", () => ServiceWorker.trackInstalling(<globalThis.ServiceWorker>reg.installing));
+		}));
 
-			window.addEventListener("beforeinstallprompt", e =>
-			{
-				e.preventDefault();
+		// Ensure refresh is only called once.
+		// This works around a bug in "force update on reload".
+		let refreshing: boolean;
 
-				pizza.ServiceWorker.dispatchEvent("beforeinstallprompt", { event: e });
-			});
-		}
-
-		public static listen(event: pizza.ServiceWorkerEvent, callback: () => void): void
+		navigator.serviceWorker.addEventListener("controllerchange", () =>
 		{
-			pizza.ServiceWorker.listeners.push({ event, callback });
-		}
+			if (refreshing) return;
 
-		public static update = (): void => pizza.ServiceWorker.sw.postMessage({ action: "skipWaiting" });
+			location.reload();
 
-		private static dispatchEvent = (event: pizza.ServiceWorkerEvent, data?: pizza.ServiceWorkerEventData) =>
+			refreshing = true;
+		});
+
+		window.addEventListener("beforeinstallprompt", e =>
 		{
-			pizza.ServiceWorker.listeners
-				.filter(listener => listener.event === event)
-				.forEach(listener => listener.callback(data));
-		}
+			e.preventDefault();
 
-		private static trackInstalling = (sw: globalThis.ServiceWorker) =>
-			sw.addEventListener("statechange", () =>
-			{
-				if (sw.state === "installed")
-				{
-					pizza.ServiceWorker.sw = sw;
-
-					pizza.ServiceWorker.dispatchEvent("updateready");
-				}
-			});
+			ServiceWorker.dispatchEvent("beforeinstallprompt", { event: e });
+		});
 	}
+
+	public static listen(event: ServiceWorkerEvent, callback: () => void): void
+	{
+		ServiceWorker.listeners.push({ event, callback });
+	}
+
+	public static update = (): void => ServiceWorker.sw.postMessage({ action: "skipWaiting" });
+
+	private static dispatchEvent = (event: ServiceWorkerEvent, data?: ServiceWorkerEventData) =>
+	{
+		ServiceWorker.listeners
+			.filter(listener => listener.event === event)
+			.forEach(listener => listener.callback(data));
+	}
+
+	private static trackInstalling = (sw: globalThis.ServiceWorker) =>
+		sw.addEventListener("statechange", () =>
+		{
+			if (sw.state === "installed")
+			{
+				ServiceWorker.sw = sw;
+
+				ServiceWorker.dispatchEvent("updateready");
+			}
+		});
 }
