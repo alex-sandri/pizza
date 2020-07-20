@@ -20,7 +20,6 @@
     "bin/*",
     "lib/**/*",
     "template/**/*",
-    "exports/**/*",
     "!template/node_modules/**/*"
   ],
   "devDependencies": {
