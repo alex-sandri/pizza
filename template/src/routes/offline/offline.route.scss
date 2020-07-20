@@ -1,0 +1,13 @@
+@import "../../global/scss/main.scss";
+
+body
+{
+    display: grid;
+    place-items: center;
+    background-color: red;
+
+    img
+    {
+        height: 70px;
+    }
+}
