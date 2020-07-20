@@ -36,7 +36,8 @@ program
 
 		if (!validationResult.validForNewPackages)
 		{
-			(<string[]>(validationResult.errors ?? validationResult.warnings)).forEach(logError);
+			validationResult.errors?.forEach(logError);
+			validationResult.warnings?.forEach(logError);
 
 			return;
 		}
