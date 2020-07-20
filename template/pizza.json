@@ -11,7 +11,7 @@
     "options": {
         "serviceWorker": {
             "assets": [
-                "/offline"
+                "/offline.html"
             ]
         }
     }

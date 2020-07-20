@@ -22,6 +22,11 @@ self.addEventListener("fetch", (e: any) =>
 				if (e.request.method === "GET") cache.put(path, fetchResponse.clone());
 
 				return fetchResponse;
+			}).catch(() =>
+			{
+				if (path === "/offline.html") return;
+
+				respondWith("/offline.html");
 			}))));
 	};
 
