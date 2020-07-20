@@ -6,12 +6,12 @@ export type ServiceWorkerEventData = {
 
 export class ServiceWorker
 {
-	private static sw: globalThis.ServiceWorker;
+	private static sw?: globalThis.ServiceWorker;
 
 	private static listeners: {
 		event: ServiceWorkerEvent,
 		callback: (data?: ServiceWorkerEventData) => void,
-	}[];
+	}[] = [];
 
 	public static register = (): void =>
 	{
@@ -66,7 +66,7 @@ export class ServiceWorker
 		ServiceWorker.listeners.push({ event, callback });
 	}
 
-	public static update = (): void => ServiceWorker.sw.postMessage({ action: "skipWaiting" });
+	public static update = (): void => ServiceWorker.sw?.postMessage({ action: "skipWaiting" });
 
 	private static dispatchEvent = (event: ServiceWorkerEvent, data?: ServiceWorkerEventData) =>
 	{
