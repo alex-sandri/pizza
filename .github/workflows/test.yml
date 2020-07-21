@@ -32,6 +32,8 @@ jobs:
           node-version: ${{ matrix.node }}
           registry-url: "https://npm.pkg.github.com"
           scope: "@alex-sandri"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: build
         run: |
           npm ci
