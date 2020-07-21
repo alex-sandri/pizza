@@ -30,6 +30,8 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node }}
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@alex-sandri"
       - name: build
         run: |
           npm ci
