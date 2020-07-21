@@ -36,6 +36,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: build
         run: |
+          echo @alex-sandri:registry=https://npm.pkg.github.com/ >> .npmrc
           npm ci
           npm run build
         env:
