@@ -115,15 +115,15 @@ export const build = (production: boolean): void =>
 		_.flatten(swAssets?.patterns?.map(pattern => glob.sync(path.join(PROJECT_PATH, "src", pattern)))),
 	]);
 
+	const outputFiles = [
+		...glob.sync(path.join(ASSETS_PATH, "css", "*.css")),
+		...glob.sync(path.join(ASSETS_PATH, "js", "*.js")),
+		...glob.sync(path.join(OUTPUT_PATH, "*.html")),
+	];
+
 	const swVersion = crypto
 		.createHash("sha1")
-		.update(assetsArray.reduce(
-			(accumulator, asset) =>
-				accumulator += fs
-					.readFileSync(path.join(PROJECT_PATH, OUTPUT_PATH, asset))
-					.toString("utf8"),
-			""
-		))
+		.update(outputFiles.reduce((accumulator, asset) => accumulator += fs.readFileSync(asset).toString("utf8"), ""))
 		.digest("hex");
 
 	const swFile = fs
