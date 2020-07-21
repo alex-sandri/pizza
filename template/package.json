@@ -17,7 +17,7 @@
     "@types/webpack": "^4.41.21",
     "@types/webpack-dev-server": "^3.11.0",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
-    "@typescript-eslint/parser": "^3.6.1",
+    "@typescript-eslint/parser": "^3.7.0",
     "css-loader": "^3.6.0",
     "eslint": "^7.5.0",
     "eslint-config-airbnb-base": "^14.2.0",
@@ -33,5 +33,7 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@alex-sandri/pizza": "^5.1.4"
+  }
 }
