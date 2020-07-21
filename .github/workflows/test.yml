@@ -36,6 +36,8 @@ jobs:
         run: |
           npm ci
           npm run build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: test
         run: |
           node lib/index.js init test
