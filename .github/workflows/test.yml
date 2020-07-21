@@ -30,10 +30,17 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: ${{ matrix.node }}
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@alex-sandri"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: build
         run: |
+          npm config set @alex-sandri:registry https://npm.pkg.github.com/
           npm ci
           npm run build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: test
         run: |
           node lib/index.js init test
