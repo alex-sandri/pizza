@@ -24,9 +24,7 @@ self.addEventListener("fetch", (e: any) =>
 				return fetchResponse;
 			}).catch(() =>
 			{
-				if (path === "/offline.html") return;
-
-				respondWith("/offline.html");
+				return cache.match("/offline.html");
 			}))));
 	};
 
