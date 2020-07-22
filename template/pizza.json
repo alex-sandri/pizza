@@ -10,9 +10,11 @@
     },
     "options": {
         "serviceWorker": {
-            "assets": [
-                "/offline.html"
-            ]
+            "assets": {
+                "static": [
+                    "/offline.html"
+                ]
+            }
         }
     }
 }
