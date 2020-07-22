@@ -130,7 +130,7 @@ export const build = (production: boolean): void =>
 		.readFileSync(path.join(__dirname, "..", "sw", "sw.js"))
 		.toString("utf8")
 		.replace("SW_VERSION", swVersion)
-		.replace("\"SW_ASSETS\"", assetsArray.join("\",\""));
+		.replace("\"SW_ASSETS\"", `"${assetsArray.join("\",\"")}"`);
 
 	fs.writeFileSync(path.join(OUTPUT_PATH, "sw.js"), swFile);
 };
