@@ -6,7 +6,7 @@
 ![Node Version](https://img.shields.io/badge/node-%3E%3D%2010.0.0-brightgreen)\
 ![David](https://img.shields.io/david/alex-sandri/pizza)
 
-A simple tool to create a web app using:
+A simple tool to create a PWA (Progressive Web App) using:
  - TypeScript
  - SCSS
  - Handlebars
