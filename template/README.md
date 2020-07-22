@@ -46,6 +46,28 @@ Currently the `pizza.json` file options, except for the local server one, have o
 
 ### PWA
 
+#### Add assets to the cache
+
+To add assets to the Service Worker cache edit the `pizza.json` file like in this example:
+
+```json
+{
+    "options": {
+        "serviceWorker": {
+            "assets": {
+                "static": [
+                    "/offline.html"
+                ],
+                "patterns": [
+                    "/assets/js/*.css",
+                    "/assets/js/*.js"
+                ]
+            }
+        }
+    }
+}
+```
+
 #### Register the Service Worker
 Add the following code at the top of every `<route-name>.route.ts` file.
 
