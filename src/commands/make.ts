@@ -4,7 +4,7 @@ import handlebars from "handlebars";
 import glob from "glob";
 import crypto from "crypto";
 import { getConfigOptions } from "../scripts/utilities";
-import * as _ from "lodash";
+import _ from "lodash";
 
 export const build = (production: boolean): void =>
 {
