@@ -12,8 +12,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
         with:
           node-version: 14
       - run: npm ci
@@ -26,8 +26,8 @@ jobs:
         os: [ windows-latest, ubuntu-latest, macos-latest ]
         node: [ 10, 12, 14 ]
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      - uses: actions/checkout@main
+      - uses: actions/setup-node@main
         with:
           node-version: ${{ matrix.node }}
           registry-url: "https://npm.pkg.github.com"
