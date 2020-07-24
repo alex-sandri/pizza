@@ -23,6 +23,7 @@
                 <component-name>.component.scss     The component's styles
                 <component-name>.component.ts       The component's code
     .eslintrc.json                                  ESLint configuration
+    .gitignore                                      Specifies intentionally untracked files that Git should ignore
     package.json                                    Configures npm package dependencies that are required for this project
     package-lock.json                               Provides version information for all packages installed into node_modules by the npm client
     pizza.json                                      Configures this project
