@@ -73,7 +73,7 @@ To add assets to the Service Worker cache edit the `pizza.json` file like in thi
 Add the following code at the top of every `<route-name>.route.ts` file.
 
 ```typescript
-import * as pizza from "@alex-sandri/pizza";
+import * as pizza from "@alex-sandri/pizza-utilities";
 
 pizza.ServiceWorker.register();
 ```
