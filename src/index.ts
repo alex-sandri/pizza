@@ -91,7 +91,8 @@ program
 		{
 			setConfigOptions({
 				...getConfigOptions(projectDirPath),
-				server: { name: "firebase" }
+				server: { name: "firebase" },
+				hostingProvider: { name: "firebase" },
 			}, projectDirPath);
 
 			runCommand("firebase init", projectDirPath);
