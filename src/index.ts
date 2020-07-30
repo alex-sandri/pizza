@@ -142,6 +142,19 @@ program
 		runCommand(`npm run serve:${configOptions.server.name}`);
 	});
 
+program
+	.command("deliver")
+	.description("Upload the 'dist' folder to the configured hosting provider")
+	.action(() =>
+	{
+		checkNodeVersion();
+
+		const configOptions = getConfigOptions();
+
+		if (configOptions.hostingProvider.name !== "unset")
+			runCommand(`npm run deliver:${configOptions.hostingProvider.name}`);
+	});
+
 const generateCommand = new commander
 	.Command("generate")
 	.alias("g")

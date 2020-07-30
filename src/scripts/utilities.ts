@@ -20,6 +20,9 @@ export type ConfigOptions =
 	server: {
 		name: "webpack" | "firebase",
 	},
+	hostingProvider: {
+		name: "firebase" | "unset",
+	},
 	options?: {
 		serviceWorker?: {
 			assets?: {

@@ -8,6 +8,9 @@
     "server": {
         "name": "webpack"
     },
+    "hostingProvider": {
+        "name": "unset"
+    },
     "options": {
         "serviceWorker": {
             "assets": {
