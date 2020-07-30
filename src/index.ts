@@ -154,7 +154,7 @@ program
 
 		switch (configOptions.hostingProvider.name)
 		{
-			case "firebase":
+			case "firebase": {
 				const firebaseConfig = fs.readJSONSync(path.join(process.cwd(), "firebase.json"));
 
 				// Set the folder to deploy to 'dist'
@@ -162,13 +162,14 @@ program
 
 				fs.writeJSONSync(path.join(process.cwd(), "firebase.json"), firebaseConfig);
 
-				runCommand(`npm run deliver:firebase`);
+				runCommand("npm run deliver:firebase");
 
 				// Set the folder to deploy back to 'public' (for the hosting emulator)
 				firebaseConfig.hosting.public = "public";
 
 				fs.writeJSONSync(path.join(process.cwd(), "firebase.json"), firebaseConfig);
 				break;
+			}
 		}
 	});
 
