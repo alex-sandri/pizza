@@ -78,6 +78,14 @@ pizza serve
 
 This will start a local server using `webpack-dev-server` (default) or, if you initialized the project with the `--firebase` option, using `firebase serve --only hosting`.
 
+### Deploy
+
+```bash
+pizza deliver
+```
+
+This will deploy the `dist` folder to the configured hosting provider (As of now only `firebase` is a supported hosting provider).
+
 ### Generate a new route
 
 ```bash
