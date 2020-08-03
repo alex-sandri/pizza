@@ -1,6 +1,6 @@
 {
   "name": "@alex-sandri/pizza",
-  "version": "7.0.3",
+  "version": "7.0.4",
   "description": "A simple tool to start building a PWA (Progressive Web App) as quickly as possible",
   "main": "lib/index.js",
   "bin": {
