@@ -30,6 +30,9 @@ export default (env: any, argv: any) =>
             },
             resolve: {
                 extensions: [ ".ts", ".js" ],
+                alias: {
+                    Global: path.resolve(__dirname, "src/global/ts"),
+                },
             },
             output: {
                 filename: "[name].[contenthash].js",
@@ -48,6 +51,11 @@ export default (env: any, argv: any) =>
             output: {
                 filename: "[name].style.js",
                 path: path.resolve(__dirname, `${isProduction ? "dist" : "public"}/assets/css`),
+            },
+            resolve: {
+                alias: {
+                    Global: path.resolve(__dirname, "src/global/scss"),
+                },
             },
             module: {
                 rules: [
