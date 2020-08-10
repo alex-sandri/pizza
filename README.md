@@ -3,8 +3,7 @@
 ![CI Tests](https://github.com/alex-sandri/pizza/workflows/CI%20Tests/badge.svg)\
 [![GitHub license](https://img.shields.io/github/license/alex-sandri/pizza)](https://github.com/alex-sandri/pizza/blob/master/LICENSE)\
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/alex-sandri/pizza)\
-![Node Version](https://img.shields.io/badge/node-%3E%3D%2010.0.0-brightgreen)\
-![David](https://img.shields.io/david/alex-sandri/pizza)
+![Node Version](https://img.shields.io/badge/node-%3E%3D%2010.0.0-brightgreen)
 
 A simple tool to create a PWA (Progressive Web App) using:
  - TypeScript
