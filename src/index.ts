@@ -19,7 +19,6 @@ import { configApply } from "./commands/config/apply";
 import { build as buildHandlebars } from "./commands/make";
 
 const TEMPLATE_PATH = path.join(__dirname, "..", "template");
-const PROJECT_CONFIG_PATH = path.join(TEMPLATE_PATH, ".pizza", "config");
 
 const program = new commander.Command();
 
@@ -54,39 +53,15 @@ program
 
 		fs.mkdirSync(projectDirPath);
 
-		fs.copySync(TEMPLATE_PATH, projectDirPath, {
-			filter: filePath =>
-			{
-				const fileName = path.basename(filePath);
+		fs.copySync(TEMPLATE_PATH, projectDirPath);
 
-				const exclude = fileName === "webpack.config.ts";
+		const npmPackageConfig = fs.readJSONSync(path.join(projectDirPath, "package.json"));
 
-				return !exclude;
-			},
-		});
+		npmPackageConfig.name = name;
 
-		const defaultNpmPackage = fs.readJSONSync(path.join(TEMPLATE_PATH, "package.json"));
-
-		defaultNpmPackage.name = name;
-
-		fs.writeJSONSync(path.join(projectDirPath, "package.json"), defaultNpmPackage);
+		fs.writeJSONSync(path.join(projectDirPath, "package.json"), npmPackageConfig);
 
 		runCommand("npm i", projectDirPath);
-
-		const configOptions = getConfigOptions(projectDirPath);
-
-		switch (configOptions.bundler.name)
-		{
-			case "webpack":
-				fs.copyFileSync(
-					path.join(PROJECT_CONFIG_PATH, "webpack.config.ts"),
-					path.join(projectDirPath, ".pizza", "config", "webpack.config.ts")
-				);
-				break;
-			default:
-				logError(`Unsupported bundler: '${configOptions.bundler.name}'`);
-				break;
-		}
 
 		if (options.firebase)
 		{
