@@ -19,6 +19,7 @@ import { configApply } from "./commands/config/apply";
 import { build as buildHandlebars } from "./commands/make";
 
 const TEMPLATE_PATH = path.join(__dirname, "..", "template");
+const PROJECT_CONFIG_PATH = path.join(TEMPLATE_PATH, ".pizza", "config");
 
 const program = new commander.Command();
 
@@ -78,8 +79,8 @@ program
 		{
 			case "webpack":
 				fs.copyFileSync(
-					path.join(TEMPLATE_PATH, "webpack.config.ts"),
-					path.join(projectDirPath, "webpack.config.ts")
+					path.join(PROJECT_CONFIG_PATH, "webpack.config.ts"),
+					path.join(projectDirPath, ".pizza", "config", "webpack.config.ts")
 				);
 				break;
 			default:
