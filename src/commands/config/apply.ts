@@ -10,5 +10,5 @@ export const configApply = (cwd?: string): void =>
 
 	getConfigOptions(cwd);
 
-	runCommand("npx tsc webpack.config.ts --esModuleInterop", cwd);
+	runCommand("npx tsc ./.pizza/config/webpack.config.ts --esModuleInterop", cwd);
 };
