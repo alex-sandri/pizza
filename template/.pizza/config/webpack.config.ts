@@ -3,6 +3,8 @@ import glob from "glob";
 import webpack from "webpack";
 import "webpack-dev-server";
 
+const PROJECT_ROOT_FOLDER = path.join(__dirname, "..", "..");
+
 export default (env: any, argv: any) =>
 {
     const isProduction = argv.mode === "production";
@@ -12,7 +14,7 @@ export default (env: any, argv: any) =>
         scss: webpack.Configuration,
     }>{
         ts: {
-            entry: glob.sync("./src/@(components|routes)/**/*.ts").reduce((entries, entry) =>
+            entry: glob.sync(path.resolve(PROJECT_ROOT_FOLDER, "src/@(components|routes)/**/*.ts")).reduce((entries, entry) =>
             {
                 const entryName = `${path.basename(entry).split(".")[0]}.${path.basename(entry).split(".")[1]}`;
 
@@ -31,16 +33,16 @@ export default (env: any, argv: any) =>
             resolve: {
                 extensions: [ ".ts", ".js" ],
                 alias: {
-                    Global: path.resolve(__dirname, "src/global/ts"),
+                    Global: path.resolve(PROJECT_ROOT_FOLDER, "src/global/ts"),
                 },
             },
             output: {
                 filename: "[name].[contenthash].js",
-                path: path.resolve(__dirname, `${isProduction ? "dist" : "public"}/assets/js`),
+                path: path.resolve(PROJECT_ROOT_FOLDER, `${isProduction ? "dist" : "public"}/assets/js`),
             },
         },
         scss: {
-            entry: glob.sync("./src/@(components|routes)/**/*.scss").reduce((entries, entry) =>
+            entry: glob.sync(path.resolve(PROJECT_ROOT_FOLDER, "src/@(components|routes)/**/*.scss")).reduce((entries, entry) =>
             {
                 const entryName = `${path.basename(entry).split(".")[0]}.${path.basename(entry).split(".")[1]}`;
 
@@ -50,11 +52,11 @@ export default (env: any, argv: any) =>
             }, {}),
             output: {
                 filename: "[name].style.js",
-                path: path.resolve(__dirname, `${isProduction ? "dist" : "public"}/assets/css`),
+                path: path.resolve(PROJECT_ROOT_FOLDER, `${isProduction ? "dist" : "public"}/assets/css`),
             },
             resolve: {
                 alias: {
-                    Global: path.resolve(__dirname, "src/global/scss"),
+                    Global: path.resolve(PROJECT_ROOT_FOLDER, "src/global/scss"),
                 },
             },
             module: {

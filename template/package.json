@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build:webpack": "webpack --mode development",
-    "build:webpack:prod": "webpack --mode production",
+    "build:webpack": "webpack --config ./.pizza/config/webpack.config.js --mode development",
+    "build:webpack:prod": "webpack --config ./.pizza/config/webpack.config.js --mode production",
     "serve:webpack": "webpack-dev-server --open",
     "serve:firebase": "firebase serve --only hosting",
     "deliver:firebase": "firebase deploy --only hosting",
