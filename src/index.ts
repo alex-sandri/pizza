@@ -78,6 +78,7 @@ program
 			"node_modules/",
 			"public/",
 			"dist/",
+			".pizza/",
 		].join("\n"));
 
 		configApply(projectDirPath);
