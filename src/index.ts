@@ -78,7 +78,6 @@ program
 			"node_modules/",
 			"public/",
 			"dist/",
-			"webpack.config.js",
 		].join("\n"));
 
 		configApply(projectDirPath);
