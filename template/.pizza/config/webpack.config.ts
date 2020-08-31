@@ -27,6 +27,9 @@ export default (env: any, argv: any) =>
                     {
                         test: /\.ts$/,
                         loader: "ts-loader",
+                        options: {
+                            configFile: path.resolve(PROJECT_ROOT_FOLDER, ".pizza/config/tsconfig.json"),
+                        },
                     },
                 ],
             },
