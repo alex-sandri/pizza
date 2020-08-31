@@ -8,7 +8,7 @@
     "serve:webpack": "webpack-dev-server --open",
     "serve:firebase": "firebase serve --only hosting",
     "deliver:firebase": "firebase deploy --only hosting",
-    "lint:eslint": "eslint src/**/*.ts --resolve-plugins-relative-to ."
+    "lint:eslint": "eslint src/**/*.ts --config ./.pizza/config/.eslintrc.json --resolve-plugins-relative-to ."
   },
   "license": "UNLICENSED",
   "private": true,
