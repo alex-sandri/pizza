@@ -2,6 +2,7 @@ import path from "path";
 import glob from "glob";
 import webpack from "webpack";
 import "webpack-dev-server";
+import fs from "fs-extra";
 
 const PROJECT_ROOT_FOLDER = path.join(__dirname, "..", "..");
 
@@ -95,7 +96,13 @@ export default (env: any, argv: any) =>
         },
     };
 
-    if (!isProduction)
+    if (isProduction)
+    {
+        glob
+            .sync(path.resolve(PROJECT_ROOT_FOLDER, `${isProduction ? "dist" : "public"}/assets/css/*.style.js`))
+            .forEach(entry => fs.unlinkSync(entry));
+    }
+    else
     {
         configs.ts.devtool = "inline-source-map";
 
