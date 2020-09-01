@@ -133,6 +133,11 @@ export const build = (production: boolean): void =>
 		.replace("\"SW_ASSETS\"", `"${assetsArray.join("\",\"")}"`);
 
 	fs.writeFileSync(path.join(OUTPUT_PATH, "sw.js"), swFile);
+
+	if (production)
+		glob
+            .sync(path.join(ASSETS_PATH, "css", "*.style.js"))
+            .forEach(entry => fs.unlinkSync(entry));
 };
 
 const getPartialsUsedIn = (partialPath: string): string[] =>

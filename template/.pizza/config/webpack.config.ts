@@ -96,13 +96,7 @@ export default (env: any, argv: any) =>
         },
     };
 
-    if (isProduction)
-    {
-        glob
-            .sync(path.resolve(PROJECT_ROOT_FOLDER, `dist/assets/css/*.style.js`))
-            .forEach(entry => fs.unlinkSync(entry));
-    }
-    else
+    if (!isProduction)
     {
         configs.ts.devtool = "inline-source-map";
 
