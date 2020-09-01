@@ -136,8 +136,8 @@ export const build = (production: boolean): void =>
 
 	if (production)
 		glob
-            .sync(path.join(ASSETS_PATH, "css", "*.style.js"))
-            .forEach(entry => fs.unlinkSync(entry));
+			.sync(path.join(ASSETS_PATH, "css", "*.style.js"))
+			.forEach(entry => fs.unlinkSync(entry));
 };
 
 const getPartialsUsedIn = (partialPath: string): string[] =>
