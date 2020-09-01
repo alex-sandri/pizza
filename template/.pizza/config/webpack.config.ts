@@ -99,7 +99,7 @@ export default (env: any, argv: any) =>
     if (isProduction)
     {
         glob
-            .sync(path.resolve(PROJECT_ROOT_FOLDER, `${isProduction ? "dist" : "public"}/assets/css/*.style.js`))
+            .sync(path.resolve(PROJECT_ROOT_FOLDER, `dist/assets/css/*.style.js`))
             .forEach(entry => fs.unlinkSync(entry));
     }
     else
