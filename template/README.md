@@ -3,6 +3,12 @@
 ## Project structure
 
 ```
+    .pizza/
+        config/
+            .eslintrc.json                                  ESLint configuration
+            tsconfig.json                                   TypeScript configuration
+            webpack.config.ts                               webpack configuration
+    .vscode/                                        Visual Studio Code configuration
     dist/                                           The folder containing the result of the 'make --prod' command (aka the folder you can upload on a server)
     node_modules/                                   Provides npm packages to the entire project
     public/                                         The folder containing the result of the 'make' command (development build)
@@ -22,14 +28,12 @@
                 <component-name>.component.hbs      The component's HTML template
                 <component-name>.component.scss     The component's styles
                 <component-name>.component.ts       The component's code
-    .eslintrc.json                                  ESLint configuration
+    .editorconfig                                   Editor configuration
     .gitignore                                      Specifies intentionally untracked files that Git should ignore
     package.json                                    Configures npm package dependencies that are required for this project
     package-lock.json                               Provides version information for all packages installed into node_modules by the npm client
     pizza.json                                      Configures this project
     README.md                                       The file you're reading
-    tsconfig.json                                   TypeScript configuration
-    webpack.config.ts                               webpack configuration
 ```
 
 ## Configure
