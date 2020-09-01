@@ -40,9 +40,7 @@
 
 You can configure the project modifying these files:
  - `pizza.json` The main configuration file
- - `.eslintrc.json` ESLint configuration
- - `tsconfig.json` TypeScript configuration
- - `webpack.config.ts` webpack configuration
+ - An option to configure `ESLint`, `TypeScript` and `webpack` will be added in the future
 
 In the `pizza.json` file you can configure things like the bundler, the linter, the server and the hosting provider.
 
